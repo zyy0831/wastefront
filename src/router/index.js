@@ -25,9 +25,14 @@ const routes = [
         component: () => import('../views/map/basicMap.vue')
       },
       {
-        path:'/info', // 首页的路由
+        path:'/info', // 城市信息
         name:'info',
-        component: () => import('../views/infoCity/info.vue')
+        component: () => import('../views/function/info.vue')
+      },
+      {
+        path:'/RSI', // 遥感影像
+        name:'RSI',
+        component: () => import('../views/function/rsImg.vue')
       },
     ]
   },

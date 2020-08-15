@@ -29,13 +29,13 @@
         </el-collapse-item>
         <el-collapse-item title="建筑垃圾核心信息" name="2">
           <el-form :model="cityInfoForm">
-          <el-row>
-            <el-form-item prop="landfillNum" label="填埋场数量">
-              <el-input placeholder="" v-model="cityInfoForm.landfillNum" style="width: 50%;" :disabled="Dis">
-                <template slot="append">座</template>
-              </el-input>
-            </el-form-item>
-          </el-row>
+            <el-row>
+              <el-form-item prop="landfillNum" label="填埋场数量">
+                <el-input placeholder="" v-model="cityInfoForm.landfillNum" style="width: 50%;" :disabled="Dis">
+                  <template slot="append">座</template>
+                </el-input>
+              </el-form-item>
+            </el-row>
           </el-form>
         </el-collapse-item>
       </el-collapse>
@@ -78,7 +78,7 @@
     right: 3%;
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
-    opacity:0.9;
+    opacity: 0.9;
   }
 
 </style>
