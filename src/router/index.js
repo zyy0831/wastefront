@@ -34,6 +34,11 @@ const routes = [
         name:'RSI',
         component: () => import('../views/function/rsImg.vue')
       },
+      {
+        path:'/heatmap', // 热力图
+        name:'heatmap',
+        component: () => import('../views/function/heatMap.vue')
+      },
     ]
   },
 ];
