@@ -51,7 +51,7 @@
         map: null,
         view: null,
         areaLayer: null,
-        mapCenter: [113.186303, 33.767782], //地图中心点，默认——平顶山
+        mapCenter: this.$store.state.mainPoint, //地图中心点，默认——平顶山
         mapZoom: 8
         // [114.052857, 22.545676] 深圳
       }
@@ -177,7 +177,7 @@
             areaFeature = new Feature({
               geometry: new Polygon(
                 lineData.geometry.coordinates
-              ).transform("EPSG:3857","EPSG:4326")
+              )
             });
           }
         });
