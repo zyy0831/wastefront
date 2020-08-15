@@ -5,34 +5,71 @@
 
 <script>
   import 'ol/ol.css'
+  import TileLayer from 'ol/layer/Tile'
+  import VectorLayer from "ol/layer/Vector"
+  import VectorSource from "ol/source/Vector"
+  // import View from 'ol/View'
+  // import Map from 'ol/Map'
+  import {
+    Map,
+    View,
+    Feature,
+    ol
+  } from "ol";
+  import {
+    Style,
+    Stroke,
+    Fill
+  } from "ol/style";
+  import {
+    Polygon,
+    MultiPolygon
+  } from "ol/geom";
+  import {
+    defaults as defaultControls,
+    OverviewMap
+  } from 'ol/control'
+  import WMTS from 'ol/source/WMTS'
+  import WMTSTileGrid from 'ol/tilegrid/WMTS'
   import {
     get as getProjection
   } from 'ol/proj'
   import {
+    fromLonLat
+  } from "ol/proj";
+  import {
     getWidth,
     getTopLeft
   } from 'ol/extent'
-  import View from 'ol/View'
-  import Map from 'ol/Map'
-  import TileLayer from 'ol/layer/Tile'
-  import WMTS from 'ol/source/WMTS'
-  import WMTSTileGrid from 'ol/tilegrid/WMTS'
-  import {
-    defaults as defaultControls
-  } from 'ol/control'
 
+
+  import szNoSub from '../../assets/geoJson/shenzhenNoSub.json'
   export default {
     name: 'OlMap',
     data() {
       return {
         map: null,
         view: null,
-        mapCenter: [113.186303, 33.767782], //地图中心点，平顶山
+        areaLayer: null,
+        mapCenter: [113.186303, 33.767782], //地图中心点，默认——平顶山
+        mapZoom: 8
         // [114.052857, 22.545676] 深圳
+      }
+    },
+    computed: {
+      listenPoint() {
+        return this.$store.state.mainPoint;
       }
     },
     mounted() {
       this.loadMap();
+      this.addArea(szNoSub); //添加区域图层方法
+    },
+    watch: {
+      listenPoint: function (old, newd) {
+        // this.mapCenter = old;
+        this.changeCity(old);
+      }
     },
     methods: {
       loadMap() {
@@ -52,7 +89,7 @@
         this.view = new View({
           center: this.mapCenter,
           projection: projection,
-          zoom: 8
+          zoom: this.mapZoom
         });
         this.map = new Map({
           layers: [
@@ -111,24 +148,57 @@
         });
       },
       changeCity(xy) {
-        console.log(xy)
+        // console.log(xy)
         this.view.setCenter(xy);
-
-
+      },
+      /**
+       * 设置区域
+       */
+      addArea(geo = []) {
+        if (geo.length == 0) return false;
+        let areaFeature = null;
+        // 设置图层
+        this.areaLayer = new VectorLayer({
+          source: new VectorSource({
+            features: []
+          })
+        });
+        // 添加图层
+        this.map.addLayer(this.areaLayer);
+        geo.forEach(g => {
+          let lineData = g.features[0];
+          if (lineData.geometry.type == "MultiPolygon") {
+            areaFeature = new Feature({
+              geometry: new MultiPolygon(
+                lineData.geometry.coordinates
+              )
+            });
+          } else if (lineData.geometry.type == "Polygon") {
+            areaFeature = new Feature({
+              geometry: new Polygon(
+                lineData.geometry.coordinates
+              ).transform("EPSG:3857","EPSG:4326")
+            });
+          }
+        });
+        areaFeature.setStyle(
+          new Style({
+            // fill: new Fill({
+            //   color: "#4e98f444"
+            // }),
+            stroke: new Stroke({
+              width: 3,
+              color: [71, 137, 227, 1],
+              lineDash: [4],
+            })
+          })
+        );
+        this.areaLayer.getSource().addFeatures([areaFeature]);
       },
 
     },
-    computed: {
-      listenPoint() {
-        return this.$store.state.mainPoint;
-      }
-    },
-    watch: {
-      listenPoint: function (old, newd) {
-        // this.mapCenter = old;
-        this.changeCity(old);
-      }
-    }
+
+
   }
 
 </script>
