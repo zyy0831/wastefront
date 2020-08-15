@@ -21,8 +21,13 @@ const routes = [
       },
       {
         path:'/basicmap', // 首页的路由
-        name:'/basicmap',
+        name:'basicmap',
         component: () => import('../views/map/basicMap.vue')
+      },
+      {
+        path:'/info', // 首页的路由
+        name:'info',
+        component: () => import('../views/infoCity/info.vue')
       },
     ]
   },
