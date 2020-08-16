@@ -23,7 +23,7 @@
     data() {
       return {
         headerImg: require('../../../../src/assets/img/locationMap.png'),
-        selectCity: '平顶山市',
+        selectCity: '深圳市',
       }
     },
     methods:{
