@@ -39,6 +39,11 @@ const routes = [
         name:'heatmap',
         component: () => import('../views/function/heatMap.vue')
       },
+      {
+        path:'/iot', // 热力图
+        name:'iot',
+        component: () => import('../views/function/iot.vue')
+      },
     ]
   },
 ];

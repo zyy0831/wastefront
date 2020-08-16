@@ -3,7 +3,7 @@
         <el-col :sm="24" :md="2" :lg="1">
           <img :src="headerImg" style="height:50px">
         </el-col>
-        <el-col :sm="24" :md="10" :lg="5">
+        <el-col :sm="24" :md="10" :lg="8">
           <p class="header-container-p">建筑垃圾识别监测系统</p>
           <p class="header-container-p">System For Identifying And Monitoring Construction Waste</p>
         </el-col>

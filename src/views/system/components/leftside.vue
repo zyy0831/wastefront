@@ -14,6 +14,10 @@
       <i class="el-icon-setting"></i>
       <span slot="title">热力图</span>
     </el-menu-item>
+    <el-menu-item index="/iot" :route="{name:'iot'}">
+      <i class="el-icon-setting"></i>
+      <span slot="title">物联网监测</span>
+    </el-menu-item>
   </el-menu>
 </template>
 <script>
