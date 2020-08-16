@@ -85,7 +85,6 @@
        * 批量根据经纬度坐标打点
        */
       addPoints(coordinates) {
-        console.log("aaa");
         // 设置图层
         this.pointLayer = new VectorLayer({
           source: new VectorSource()
@@ -137,6 +136,7 @@
             imgURL: "../../images/label/bj.png" //标注的图片
           }
         }
+
         // 创建一个弹窗 Overlay 对象
         this.overlay = new Overlay({
           element: container, //绑定 Overlay 对象和 DOM 对象的
@@ -202,6 +202,10 @@
             return feature;
           });
           if (feature) {
+            console.log(feature)
+            var a = feature.getGeometry();
+            console.log('横坐标'+a.flatCoordinates[0]+'纵坐标'+a.flatCoordinates[1])
+            //values_.geometry.flatCoordinates
             content.innerHTML = ''; //清空popup的内容容器
             addFeatrueInfo(featuerInfo); //在popup中加载当前要素的具体信息
             if (_that.overlay.getPosition() == undefined) {
@@ -211,6 +215,7 @@
         });
         /**
          * 为map添加鼠标移动事件监听，当指向标注时改变鼠标光标状态
+         * change mouse cursor when over marker
          */
         _that.map.on('pointermove', function (e) {
           var pixel = _that.map.getEventPixel(e.originalEvent);
