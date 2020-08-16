@@ -35,12 +35,17 @@ const routes = [
         component: () => import('../views/function/rsImg.vue')
       },
       {
+        path:'/shp', // 遥感影像
+        name:'shp',
+        component: () => import('../views/function/shp.vue')
+      },
+      {
         path:'/heatmap', // 热力图
         name:'heatmap',
         component: () => import('../views/function/heatMap.vue')
       },
       {
-        path:'/iot', // 热力图
+        path:'/iot', // 物联网
         name:'iot',
         component: () => import('../views/function/iot.vue')
       },

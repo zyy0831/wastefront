@@ -10,6 +10,10 @@
       <i class="el-icon-setting"></i>
       <span slot="title">遥感影像</span>
     </el-menu-item>
+    <el-menu-item index="/shp" :route="{name:'shp'}">
+      <i class="el-icon-setting"></i>
+      <span slot="title">矢量</span>
+    </el-menu-item>
     <el-menu-item index="/heatmap" :route="{name:'heatmap'}">
       <i class="el-icon-setting"></i>
       <span slot="title">热力图</span>
