@@ -4,7 +4,7 @@ Vue.use(Vuex)
 let store=new Vuex.Store({
   state:{
     // count:1,
-    mainPoint:'',
+    mainPoint:[114.052857, 22.545676],
   }
 
 })
