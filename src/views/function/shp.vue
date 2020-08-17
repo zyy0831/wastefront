@@ -28,18 +28,20 @@ export default {
     },
     getWMS() {
       this.wmsLayer = new TileLayer({
-        opacity:0.5,
+        
         source: new TileWMS({
           params: {
-            FORMAT: "image/jpeg",
+            FORMAT: "image/png",
             VERSION: "1.1.0",
-            LAYERS: "karl:Export_Output",
+            LAYERS: "	karl:Export_Output1",
             TILED: true,
             STYLES: "",
+            transparent: true,
+            opacity:1,
           },
-          url: "http://localhost:8080/geoserver/karl/wms",
-          transition: 0,
-          serverType:'geoserver'
+          url: "http://localhost:8080/geoserver/karl/wms?service=WMS",
+             serverType:'geoserver'
+         
         }),
       }),
       this.map.addLayer(this.wmsLayer);
