@@ -1,9 +1,11 @@
 <template>
   <div id="iot">
     <basicmap ref="map"></basicmap>
-    <div id="popup" class="ol-popup">
+    <div id="popup" class="ol-popup" style="width:400px">
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-      <div id="popup-content" class="popup-content"></div>
+      <p>{{iotInfo.title}}</p>
+      <p>{{iotInfo.text}}</p>
+      <p>{{iotInfo.titleURL}}</p>
     </div>
   </div>
 </template>
@@ -12,8 +14,6 @@
   import TileLayer from 'ol/layer/Tile'
   import VectorLayer from "ol/layer/Vector"
   import VectorSource from "ol/source/Vector"
-  // import View from 'ol/View'
-  // import Map from 'ol/Map'
   import {
     Map,
     View,
@@ -41,19 +41,13 @@
         pointLayer: null,
         featuresArr: [],
         overlay: null,
-      }
-    },
-    mounted() {
-      this.initMap();
-      this.getPoint();
-      this.addPopup();
-    },
-    methods: {
-      initMap() {
-        this.map = this.$store.state.map
-      },
-      getPoint() {
-        let coordinates = [{
+        iotInfo: {
+          imgURL: '',
+          text: '',
+          title: '',
+          titleURL: '',
+        },
+        iotCoordinates: [{
             x: "113.066812",
             y: "33.866359",
             type: "lv"
@@ -78,8 +72,21 @@
             y: "33.737579",
             type: "lv"
           }
-        ];
-        this.addPoints(coordinates); //根据坐标点批量打点
+        ],
+        old: ''
+      }
+    },
+    mounted() {
+      this.initMap();
+      this.getPoint();
+      this.addPopup();
+    },
+    methods: {
+      initMap() {
+        this.map = this.$store.state.map
+      },
+      getPoint() {
+        this.addPoints(this.iotCoordinates); //根据坐标点批量打点
       },
       /**
        * 批量根据经纬度坐标打点
@@ -124,7 +131,6 @@
         // 使用变量存储弹窗所需的 DOM 对象
         let container = document.getElementById("popup");
         let closer = document.getElementById("popup-closer");
-        let content = document.getElementById("popup-content");
         var beijing = [116.28, 39.54];
         //示例标注点北京市的信息对象
         var featuerInfo = {
@@ -161,24 +167,9 @@
          * @param {string} title
          */
         function addFeatrueInfo(info) {
-          //新增a元素
-          var elementA = document.createElement('a');
-          elementA.className = "markerInfo";
-          elementA.href = info.att.titleURL;
-          //elementA.innerText = info.att.title;
-          setInnerText(elementA, info.att.title);
-          content.appendChild(elementA); // 新建的div元素添加a子节点
-          //新增div元素
-          var elementDiv = document.createElement('div');
-          elementDiv.className = "markerText";
-          //elementDiv.innerText = info.att.text;
-          setInnerText(elementDiv, info.att.text);
-          content.appendChild(elementDiv); // 为content添加div子节点
-          //新增img元素
-          var elementImg = document.createElement('img');
-          elementImg.className = "markerImg";
-          elementImg.src = info.att.imgURL;
-          content.appendChild(elementImg); // 为content添加img子节点
+          _that.iotInfo.title = info.att.title;
+          _that.iotInfo.text = info.att.text;
+          _that.iotInfo.titleURL = info.att.titleURL;
         }
         /**
          * 动态设置元素文本内容（兼容）
@@ -196,21 +187,27 @@
          * display popup on click
          */
         _that.map.on("click", function (evt) {
-          let coordinate = evt.coordinate
+          let coordinate = evt.coordinate;
           //判断当前单击处是否有要素，捕获到要素时弹出popup
           var feature = _that.map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
             return feature;
           });
           if (feature) {
-            console.log(feature)
-            var a = feature.getGeometry();
-            console.log('横坐标'+a.flatCoordinates[0]+'纵坐标'+a.flatCoordinates[1])
-            //values_.geometry.flatCoordinates
-            content.innerHTML = ''; //清空popup的内容容器
+            // console.log(feature)
+            // var a = feature.getGeometry();
+            // console.log('横坐标' + a.flatCoordinates[0] + '纵坐标' + a.flatCoordinates[1])
+            // console.log(feature.getGeometry().flatCoordinates)
             addFeatrueInfo(featuerInfo); //在popup中加载当前要素的具体信息
+            // console.log(_that.overlay.getPosition())  //popup的坐标信息
             if (_that.overlay.getPosition() == undefined) {
               _that.overlay.setPosition(coordinate); //设置popup的位置
+              _that.old = feature.getGeometry().flatCoordinates
+            } else if (feature.getGeometry().flatCoordinates != _that.old) {
+              _that.overlay.setPosition(coordinate);
             }
+          } else {
+            _that.overlay.setPosition(undefined); //设置popup的位置
+
           }
         });
         /**
@@ -283,9 +280,6 @@
     right: 8px;
   }
 
-  .popup-content {
-    width: 400px;
-  }
 
   .ol-popup-closer:after {
     content: "✖";
