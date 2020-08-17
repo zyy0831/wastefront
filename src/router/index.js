@@ -49,6 +49,26 @@ const routes = [
         name:'iot',
         component: () => import('../views/function/iot.vue')
       },
+      {
+        path:'/checkRes', //
+        name:'checkRes',
+        component: () => import('../views/infoSearch/checkRes.vue')
+      },
+      {
+        path:'/annualData', //
+        name:'annualData',
+        component: () => import('../views/infoSearch/annualData.vue')
+      },
+      {
+        path:'/monitUnit', //
+        name:'monitUnit',
+        component: () => import('../views/infoSearch/monitUnit.vue')
+      },
+      {
+        path:'/lawsReg', //
+        name:'lawsReg',
+        component: () => import('../views/infoSearch/lawsReg.vue')
+      },
     ]
   },
 ];
