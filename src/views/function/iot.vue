@@ -85,7 +85,6 @@
        * 批量根据经纬度坐标打点
        */
       addPoints(coordinates) {
-        console.log("aaa");
         // 设置图层
         this.pointLayer = new VectorLayer({
           source: new VectorSource()
@@ -126,6 +125,18 @@
         let container = document.getElementById("popup");
         let closer = document.getElementById("popup-closer");
         let content = document.getElementById("popup-content");
+        var beijing = [116.28, 39.54];
+        //示例标注点北京市的信息对象
+        var featuerInfo = {
+          geo: beijing,
+          att: {
+            title: "北京市(中华人民共和国首都)", //标注信息的标题内容
+            titleURL: "http://www.openlayers.org/", //标注详细信息链接
+            text: "北京（Beijing），简称京，中华人民共和国首都、直辖市，中国的政治、文化和国际交往中心……", //标注内容简介
+            imgURL: "../../images/label/bj.png" //标注的图片
+          }
+        }
+
         // 创建一个弹窗 Overlay 对象
         this.overlay = new Overlay({
           element: container, //绑定 Overlay 对象和 DOM 对象的
@@ -138,16 +149,6 @@
         this.map.addOverlay(this.overlay);
         let _that = this;
         /**
-         * 添加单击响应函数来处理弹窗动作
-         */
-        this.map.on("click", function (evt) {
-          let coordinate = evt.coordinate
-          content.innerHTML = `
-                <p>你点击了这里：</p>
-                <p>坐标：</p>X：${coordinate[0]} &nbsp;&nbsp; Y: ${coordinate[1]}`;
-          _that.overlay.setPosition(evt.coordinate); //把 overlay 显示到指定的 x,y坐标
-        });
-        /**
          * 为弹窗添加一个响应关闭的函数
          */
         closer.onclick = function () {
@@ -155,6 +156,74 @@
           closer.blur();
           return false;
         };
+        /**
+         * 动态创建popup的具体内容
+         * @param {string} title
+         */
+        function addFeatrueInfo(info) {
+          //新增a元素
+          var elementA = document.createElement('a');
+          elementA.className = "markerInfo";
+          elementA.href = info.att.titleURL;
+          //elementA.innerText = info.att.title;
+          setInnerText(elementA, info.att.title);
+          content.appendChild(elementA); // 新建的div元素添加a子节点
+          //新增div元素
+          var elementDiv = document.createElement('div');
+          elementDiv.className = "markerText";
+          //elementDiv.innerText = info.att.text;
+          setInnerText(elementDiv, info.att.text);
+          content.appendChild(elementDiv); // 为content添加div子节点
+          //新增img元素
+          var elementImg = document.createElement('img');
+          elementImg.className = "markerImg";
+          elementImg.src = info.att.imgURL;
+          content.appendChild(elementImg); // 为content添加img子节点
+        }
+        /**
+         * 动态设置元素文本内容（兼容）
+         */
+        function setInnerText(element, text) {
+          if (typeof element.textContent == "string") {
+            element.textContent = text;
+          } else {
+            element.innerText = text;
+          }
+        }
+
+        /**
+         * 添加单击响应函数来处理弹窗动作
+         * display popup on click
+         */
+        _that.map.on("click", function (evt) {
+          let coordinate = evt.coordinate
+          //判断当前单击处是否有要素，捕获到要素时弹出popup
+          var feature = _that.map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+            return feature;
+          });
+          if (feature) {
+            console.log(feature)
+            var a = feature.getGeometry();
+            console.log('横坐标'+a.flatCoordinates[0]+'纵坐标'+a.flatCoordinates[1])
+            //values_.geometry.flatCoordinates
+            content.innerHTML = ''; //清空popup的内容容器
+            addFeatrueInfo(featuerInfo); //在popup中加载当前要素的具体信息
+            if (_that.overlay.getPosition() == undefined) {
+              _that.overlay.setPosition(coordinate); //设置popup的位置
+            }
+          }
+        });
+        /**
+         * 为map添加鼠标移动事件监听，当指向标注时改变鼠标光标状态
+         * change mouse cursor when over marker
+         */
+        _that.map.on('pointermove', function (e) {
+          var pixel = _that.map.getEventPixel(e.originalEvent);
+          var hit = _that.map.hasFeatureAtPixel(pixel);
+          _that.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
+        });
+
+
       },
 
     },
@@ -165,12 +234,12 @@
 
 </script>
 <style scoped>
-#iot {
+  #iot {
     height: 100%;
     width: 100%;
-}
+  }
 
-.ol-popup {
+  .ol-popup {
     position: absolute;
     background-color: white;
     -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
@@ -180,9 +249,10 @@
     border: 1px solid #cccccc;
     bottom: 12px;
     left: -50px;
-}
-.ol-popup:after,
-.ol-popup:before {
+  }
+
+  .ol-popup:after,
+  .ol-popup:before {
     top: 100%;
     border: solid transparent;
     content: " ";
@@ -190,31 +260,35 @@
     width: 0;
     position: absolute;
     pointer-events: none;
-}
-.ol-popup:after {
+  }
+
+  .ol-popup:after {
     border-top-color: white;
     border-width: 10px;
     left: 48px;
     margin-left: -10px;
-}
-.ol-popup:before {
+  }
+
+  .ol-popup:before {
     border-top-color: #cccccc;
     border-width: 11px;
     left: 48px;
     margin-left: -11px;
-}
-.ol-popup-closer {
+  }
+
+  .ol-popup-closer {
     text-decoration: none;
     position: absolute;
     top: 2px;
     right: 8px;
-}
-.popup-content {
+  }
+
+  .popup-content {
     width: 400px;
-}
-.ol-popup-closer:after {
+  }
+
+  .ol-popup-closer:after {
     content: "✖";
-}
+  }
+
 </style>
-
-
