@@ -79,6 +79,7 @@
     mounted() {
       this.initMap();
       this.getPoint();
+      this.createdOverly();
       this.addPopup();
     },
     methods: {
@@ -127,9 +128,30 @@
         });
         return styleIcon;
       },
+      /**
+       * 动态创建popup的具体内容
+       * @param {string} title
+       */
+      addFeatrueInfo(info) {
+        this.iotInfo.title = info.att.title;
+        this.iotInfo.text = info.att.text;
+        this.iotInfo.titleURL = info.att.titleURL;
+      },
+      createdOverly(){
+        let container = document.getElementById("popup");
+        // 创建一个弹窗 Overlay 对象
+        this.overlay = new Overlay({
+          element: container, //绑定 Overlay 对象和 DOM 对象的
+          autoPan: true, // 定义弹出窗口在边缘点击时候可能不完整 设置自动平移效果
+          autoPanAnimation: {
+            duration: 250 //自动平移效果的动画时间 9毫秒
+          }
+        });
+         // 将弹窗添加到 map 地图中
+        this.map.addOverlay(this.overlay);
+      },
       addPopup() {
         // 使用变量存储弹窗所需的 DOM 对象
-        let container = document.getElementById("popup");
         let closer = document.getElementById("popup-closer");
         var beijing = [116.28, 39.54];
         //示例标注点北京市的信息对象
@@ -142,17 +164,6 @@
             imgURL: "../../images/label/bj.png" //标注的图片
           }
         }
-
-        // 创建一个弹窗 Overlay 对象
-        this.overlay = new Overlay({
-          element: container, //绑定 Overlay 对象和 DOM 对象的
-          autoPan: true, // 定义弹出窗口在边缘点击时候可能不完整 设置自动平移效果
-          autoPanAnimation: {
-            duration: 250 //自动平移效果的动画时间 9毫秒
-          }
-        });
-        // 将弹窗添加到 map 地图中
-        this.map.addOverlay(this.overlay);
         let _that = this;
         /**
          * 为弹窗添加一个响应关闭的函数
@@ -162,25 +173,6 @@
           closer.blur();
           return false;
         };
-        /**
-         * 动态创建popup的具体内容
-         * @param {string} title
-         */
-        function addFeatrueInfo(info) {
-          _that.iotInfo.title = info.att.title;
-          _that.iotInfo.text = info.att.text;
-          _that.iotInfo.titleURL = info.att.titleURL;
-        }
-        /**
-         * 动态设置元素文本内容（兼容）
-         */
-        function setInnerText(element, text) {
-          if (typeof element.textContent == "string") {
-            element.textContent = text;
-          } else {
-            element.innerText = text;
-          }
-        }
 
         /**
          * 添加单击响应函数来处理弹窗动作
@@ -197,7 +189,7 @@
             // var a = feature.getGeometry();
             // console.log('横坐标' + a.flatCoordinates[0] + '纵坐标' + a.flatCoordinates[1])
             // console.log(feature.getGeometry().flatCoordinates)
-            addFeatrueInfo(featuerInfo); //在popup中加载当前要素的具体信息
+            _that.addFeatrueInfo(featuerInfo); //在popup中加载当前要素的具体信息
             // console.log(_that.overlay.getPosition())  //popup的坐标信息
             if (_that.overlay.getPosition() == undefined) {
               _that.overlay.setPosition(coordinate); //设置popup的位置
