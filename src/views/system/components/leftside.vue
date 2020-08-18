@@ -22,6 +22,19 @@
       <i class="el-icon-setting"></i>
       <span slot="title">物联网监测</span>
     </el-menu-item>
+    <el-submenu class="text left-action" index="1">
+      <template class="text left-action" slot="title">
+        <span class="text left-action"> 数据查询</span>
+      </template>
+
+      <el-menu-item class="text left-action" index="/checkRes" :route="{name:'checkRes'}">
+        存量排查
+      </el-menu-item>
+      <el-menu-item class="text left-action" index="/annualData" :route="{name:'annualData'}">年度基础数据</el-menu-item>
+      <el-menu-item class="text left-action" index="/monitUnit" :route="{name:'monitUnit'}">监管单位</el-menu-item>
+      <el-menu-item class="text left-action" index="/lawsReg" :route="{name:'lawsReg'}">法律法规
+      </el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 <script>
