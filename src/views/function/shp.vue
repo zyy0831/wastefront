@@ -68,7 +68,7 @@
               params: {
                 FORMAT: "image/png",
                 VERSION: "1.1.0",
-                LAYERS: "	cite:Export_Output",
+                LAYERS: "cite:20200818",
                 TILED: true,
                 STYLES: "",
                 transparent: true,
