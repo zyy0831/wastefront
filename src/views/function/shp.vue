@@ -5,6 +5,9 @@
       <el-form-item label="名称" class="good" >
         <p>{{name}}</p>
       </el-form-item>
+      <el-form-item label="面积" class="good" >
+        <p>{{area}}</p>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -102,10 +105,10 @@
           method: 'get',
           url: url,
         }).then((res) => {
-          console.log(res.data.features[0].properties.name)
+          console.log(res.data.features[0].properties.area)
           this.name= res.data.features[0].properties.name
           // console.log(res.data.features[0].geometry.coordinates)
-
+              this.area= res.data.features[0].properties.area
         }).catch((err) => {
           console.log(err)
         })
