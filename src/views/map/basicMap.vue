@@ -39,6 +39,7 @@ import sz_luohq from "../../assets/geoJson/sz_luohq.json";
 import sz_nsq from "../../assets/geoJson/sz_nsq.json";
 import sz_psq from "../../assets/geoJson/sz_psq.json";
 import sz_ytq from "../../assets/geoJson/sz_ytq.json";
+import nosubpds from "../../assets/geoJson/nosubpds.json";
 export default {
   name: "OlMap",
   data() {
@@ -81,6 +82,7 @@ export default {
       this.addArea(sz_nsq);
       this.addArea(sz_psq);
       this.addArea(sz_ytq);
+      this.addArea(nosubpds)
     let coordinates = [
       {
         x: "106.918082",
