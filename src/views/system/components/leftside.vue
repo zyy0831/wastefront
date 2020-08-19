@@ -2,35 +2,36 @@
   <!--default-active代表导航栏默认选中哪个index, :collapse决定导航栏是否展开，为boolean类型
   :router决定导航栏是否开启路由模式，即在菜单item上设置路由是否生效，值为boolean类型-->
   <el-menu class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose" style="background: #298ff5;top:10px;">
-    <el-menu-item index="/info" :route="{name:'info'}" style="height:70px">
-      <img src="../../../../src/assets/img/城市搜索2 (1).png" alt="logo">
+    <el-menu-item class="left-action" index="/info" :route="{name:'info'}" style="height:70px">
+      <img src="../../../../src/assets/img/城市搜索.png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">城市信息</span>
     </el-menu-item>
-    <el-menu-item index="/RSI" :route="{name:'RSI'}" style="height:70px">
-      <i class="el-icon-picture"></i>
+    <el-menu-item class="left-action" index="/RSI" :route="{name:'RSI'}" style="height:70px">
+      <img src="../../../../src/assets/img/icon_遥感影像.png" alt="logo">
       <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像</span>
     </el-menu-item>
-    <el-menu-item index="/shp" :route="{name:'shp'}" style="height:70px">
-      <i class="el-icon-setting"></i>
-      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">矢量</span>
+    <el-menu-item class="left-action" index="/shp" :route="{name:'shp'}" style="height:70px">
+      <img src="../../../../src/assets/img/矢量图.png" alt="logo">
+      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">矢量</span>
     </el-menu-item>
-    <el-menu-item index="/heatmap" :route="{name:'heatmap'}" style="height:70px">
-      <i class="el-icon-setting"></i>
+    <el-menu-item class="left-action" index="/heatmap" :route="{name:'heatmap'}" style="height:70px">
+      <img src="../../../../src/assets/img/热力图.png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">热力图</span>
     </el-menu-item>
-    <el-menu-item index="/iot" :route="{name:'iot'}" style="height:70px">
-      <i class="el-icon-setting"></i>
+    <el-menu-item class="left-action" index="/iot" :route="{name:'iot'}" style="height:70px">
+      <img src="../../../../src/assets/img/物联网 (2).png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">物联网监测</span>
     </el-menu-item>
-    <el-submenu class="text left-action" index="1" style="height:70px">
-      <template class="text left-action" slot="title">
-        <span class="text left-action" style="color:	#FFFFFF;font-size:25px;font-weight:bold"> 数据查询</span>
+    <el-submenu class="left-action" index="1" style="height:70px">
+      <template class="left-action"  slot="title">
+        <img src="../../../../src/assets/img/查询 (2).png" alt="logo">
+        <span  class="left-action" style="color:	#FFFFFF;font-size:25px;font-weight:bold"> 数据查询</span>
       </template>
-      <el-menu-item class="text left-action" index="/checkRes" :route="{name:'checkRes'}"> 存量排查
+      <el-menu-item class="left-action" index="/checkRes" :route="{name:'checkRes'}" style="color:	#FFFFFF;font-size:20px;"> 存量排查
        </el-menu-item>
-      <el-menu-item class="text left-action" index="/annualData" :route="{name:'annualData'}">年度基础数据</el-menu-item>
-      <el-menu-item class="text left-action" index="/monitUnit" :route="{name:'monitUnit'}">监管单位</el-menu-item>
-      <el-menu-item class="text left-action" index="/lawsReg" :route="{name:'lawsReg'}">法律法规
+      <el-menu-item class="left-action" index="/annualData" :route="{name:'annualData'}" style="color:	#FFFFFF;font-size:20px;">年度基础数据</el-menu-item>
+      <el-menu-item class="left-action" index="/monitUnit" :route="{name:'monitUnit'}" style="color:	#FFFFFF;font-size:20px;">监管单位</el-menu-item>
+      <el-menu-item class="left-action" index="/lawsReg" :route="{name:'lawsReg'}" style="color:	#FFFFFF;font-size:20px;">法律法规
       </el-menu-item>
     </el-submenu>
   </el-menu>
@@ -49,10 +50,20 @@
 
 </script>
 <style scoped>
-.el-menu-item:hover {
-  background-color: #409EFF !important;
+.left-action{
+
+  background: #208af5;
 }
-.el-submenu:hover {
-  background-color: #409EFF !important;
+
+.left-action:hover{
+  background-color: #409EFF;
 }
+
+.el-submenu:hover{
+        background:  #409EFF;
+    }
+
+.el-submenu__title:hover{
+        background-color:  #409EFF;
+    }
 </style>

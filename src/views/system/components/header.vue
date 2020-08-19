@@ -3,7 +3,7 @@
         <el-col :sm="8" :md="8" :lg="8" >
           <img src="../../../../src/assets/img/logo12.png" alt="logo">
         </el-col>
-        <el-col :offset="8" :sm="6" :md="6" :lg="6">
+        <el-col :offset="8" :sm="5" :md="5" :lg="5">
           <el-dropdown trigger="hover" @command="handleCommand" style="top:35px;">
             <span style="color:#fff;font-size:20px;font-weight:bold">选择城市：{{selectCity}}<i class="el-icon-arrow-down el-icon--right"></i></span>
             <el-dropdown-menu slot="dropdown" style="background: #409EFF ;">
@@ -13,7 +13,7 @@
           </el-dropdown>
         </el-col>
         
-        <el-col :sm="2" :md="2" :lg="2" >
+        <el-col :sm="3" :md="3" :lg="3" >
           <img src="../../../../src/assets/img/timg.jpg" alt="logo">
         </el-col>
       </el-row>

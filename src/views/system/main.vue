@@ -52,5 +52,8 @@
     background:  #298ff5 ;
     box-shadow: 0 0 15px rgba(105, 105, 105, 0.76); 
   }
+ .el-main{
 
+   padding:0;
+ }
 </style>
