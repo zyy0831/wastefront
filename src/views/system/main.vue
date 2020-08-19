@@ -42,15 +42,15 @@
     margin: 0;
 }
   .el-header {
-    background: url(../../../src/assets/img/top-bg.png) center center no-repeat;
+    background: url(../../../src/assets/img/top-bg.png);
     line-height: 100%;
     padding: 0;
   }
- 
+
   .el-aside {
     width: 320px;
     background:  #298ff5 ;
-    box-shadow: 0 0 15px rgba(105, 105, 105, 0.76); 
+    box-shadow: 0 0 15px rgba(105, 105, 105, 0.76);
   }
  .el-main{
 
