@@ -14,7 +14,7 @@ Vue.use(ElementUI);
 
 Vue.config.productionTip = false
 
-Vue.prototype.qs = qs           //全局注册，使用方法为:this.qs
+Vue.prototype.$qs = qs           //全局注册，使用方法为:this.qs
 
 // step2：把axios挂载到vue的原型中，在vue中每个组件都可以使用axios发送请求,
 // 不需要每次都 import一下 axios了，直接使用 $axios 即可
