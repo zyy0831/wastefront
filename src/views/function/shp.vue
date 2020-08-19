@@ -2,12 +2,7 @@
   <div id="shpDiv">
     <basicmap ref="map"></basicmap>
     <el-form class="air" :label-position="labelPosition">
-      <el-form-item label="切换遥感影像">
-      </el-form-item>
-      <el-form-item label="01">
-        <el-checkbox v-model="checked1" @change="show()">tiff1</el-checkbox>
-      </el-form-item>
-      <el-form-item label="02">
+      <el-form-item label="名称" class="good" >
         <p>{{name}}</p>
       </el-form-item>
     </el-form>
@@ -132,12 +127,14 @@
   .air {
     z-index: 999;
     width: 15%;
-    top: 10%;
-    right: 3%;
+    height: 20%;
+    top: 25%;
+    right: 68%;
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
     opacity: 0.9;
     background-color: white;
   }
+
 
 </style>
