@@ -3,24 +3,24 @@
     <div class="air">
       <el-collapse v-model="activeName">
         <el-collapse-item title="城市基本信息" name="1">
-          <el-form :model="cityInfoForm">
+          <el-form ref="form" :model="form">
             <el-row>
-              <el-form-item prop="people" label="人口">
-                <el-input placeholder="" v-model="cityInfoForm.people" style="width: 50%;" :disabled="Dis">
+              <el-form-item prop="peo" label="人口">
+                <el-input placeholder="" v-model="form.peo" style="width: 50%;" :disabled="Dis">
                   <template slot="append">百万人</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
               <el-form-item prop="area" label="面积">
-                <el-input placeholder="" v-model="cityInfoForm.area" style="width: 50%;" :disabled="Dis">
+                <el-input placeholder="" v-model="form.area" style="width: 50%;" :disabled="Dis">
                   <template slot="append">平方公里</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
               <el-form-item prop="gdp" label="GDP">
-                <el-input placeholder="" v-model="cityInfoForm.gdp" style="width: 50%;" :disabled="Dis">
+                <el-input placeholder="" v-model="form.GDP" style="width: 50%;" :disabled="Dis">
                   <template slot="append">亿</template>
                 </el-input>
               </el-form-item>
@@ -28,15 +28,15 @@
           </el-form>
         </el-collapse-item>
         <el-collapse-item title="建筑垃圾核心信息" name="2">
-          <el-form :model="cityInfoForm">
+          <!-- <el-form>
             <el-row>
               <el-form-item prop="landfillNum" label="填埋场数量">
-                <el-input placeholder="" v-model="cityInfoForm.landfillNum" style="width: 50%;" :disabled="Dis">
+                <el-input placeholder="" v-model="form.landfillNum" style="width: 50%;" :disabled="Dis">
                   <template slot="append">座</template>
                 </el-input>
               </el-form-item>
             </el-row>
-          </el-form>
+          </el-form> -->
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -50,14 +50,28 @@
       return {
         activeName: '1',
         Dis: true,
-        cityInfoForm: {
-          people: '222',
-          area: '222',
-          gdp: '222',
-          landfillNum: '222',
-        }
+        form: {
+          peo: "",
+          area: null,
+          GDP: "",
+          landfillNum: ""
+        },
 
       }
+    },
+    created() {
+      this.getInfo();
+
+    },
+    methods: {
+      getInfo() {
+        let httpUrl = 'http://10.100.23.78:3000/search1';
+        this.$axios.post(httpUrl).then(res => {
+          this.form = res.data[0];
+          console.log(this.form.area)
+        })
+      }
+
     },
     components: {
       basicmap: basicmap,
