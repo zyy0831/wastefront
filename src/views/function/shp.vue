@@ -7,6 +7,9 @@
       <el-form-item label="01">
         <el-checkbox v-model="checked1" @change="show()">tiff1</el-checkbox>
       </el-form-item>
+      <el-form-item label="02">
+        <p>{{name}}</p>
+      </el-form-item>
     </el-form>
   </div>
 </template>
@@ -51,6 +54,7 @@
         wmsLayer: null,
         URL1: "http://10.100.18.67:8080/geoserver/cite/wms?service=WMS",
         checked1: true,
+        name:''
       };
     },
     mounted() {
@@ -63,6 +67,7 @@
       },
       getWMS() {
         this.wmsLayer = new TileLayer({
+            name: 'layerName123',
             visible: this.checked1,
             source: new TileWMS({
               params: {
@@ -87,18 +92,28 @@
       },
       mapClick: function (evt) {
         var _that = this;
+        var feature = _that.map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
+          return layer;
+        });
+        console.log(feature)
         var viewResolution = _that.map.getView().getResolution();
         var url = _that.wmsLayer.getSource().getFeatureInfoUrl(evt.coordinate, viewResolution, 'EPSG:4326', {
           'INFO_FORMAT': 'application/json',
         });
+        // console.log(_that.wmsLayer.get('name'))
         console.log(url)
-        // $.ajax({
-        //     type: 'GET',
-        //     url:url,
-        //     success:function(res){
-        //         console.log(res);
-        //     }
-        // });
+        // console.log(_that.map.getLayers().array_)
+        this.$axios({
+          method: 'get',
+          url: url,
+        }).then((res) => {
+          console.log(res.data.features[0].properties.name)
+          this.name= res.data.features[0].properties.name
+          // console.log(res.data.features[0].geometry.coordinates)
+
+        }).catch((err) => {
+          console.log(err)
+        })
       }
     },
     components: {
