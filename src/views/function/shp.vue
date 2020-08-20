@@ -2,10 +2,10 @@
   <div id="shpDiv">
     <basicmap ref="map"></basicmap>
     <el-form class="air" :label-position="labelPosition">
-      <el-form-item label="名称" class="good" >
+      <el-form-item label="名称" class="good">
         <p>{{name}}</p>
       </el-form-item>
-      <el-form-item label="面积" class="good" >
+      <el-form-item label="面积" class="good">
         <p>{{area}}</p>
       </el-form-item>
     </el-form>
@@ -52,7 +52,8 @@
         wmsLayer: null,
         URL1: "http://10.100.18.67:8080/geoserver/cite/wms?service=WMS",
         checked1: true,
-        name:''
+        name: '',
+        area: '',
       };
     },
     mounted() {
@@ -89,13 +90,9 @@
         this.wmsLayer.setVisible(this.checked1);
       },
       mapClick: function (evt) {
-        var _that = this;
-        var feature = _that.map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
-          return layer;
-        });
-        console.log(feature)
-        var viewResolution = _that.map.getView().getResolution();
-        var url = _that.wmsLayer.getSource().getFeatureInfoUrl(evt.coordinate, viewResolution, 'EPSG:4326', {
+        let _that = this;
+        let viewResolution = _that.map.getView().getResolution();
+        let url = _that.wmsLayer.getSource().getFeatureInfoUrl(evt.coordinate, viewResolution, 'EPSG:4326', {
           'INFO_FORMAT': 'application/json',
         });
         // console.log(_that.wmsLayer.get('name'))
@@ -106,9 +103,9 @@
           url: url,
         }).then((res) => {
           console.log(res.data.features[0].properties.area)
-          this.name= res.data.features[0].properties.name
+          this.name = res.data.features[0].properties.name
           // console.log(res.data.features[0].geometry.coordinates)
-              this.area= res.data.features[0].properties.area
+          this.area = res.data.features[0].properties.area
         }).catch((err) => {
           console.log(err)
         })
@@ -138,6 +135,5 @@
     opacity: 0.9;
     background-color: white;
   }
-
 
 </style>

@@ -28,7 +28,7 @@
           </el-form>
         </el-collapse-item>
         <el-collapse-item title="建筑垃圾核心信息" name="2">
-          <!-- <el-form>
+          <el-form :model="form">
             <el-row>
               <el-form-item prop="landfillNum" label="填埋场数量">
                 <el-input placeholder="" v-model="form.landfillNum" style="width: 50%;" :disabled="Dis">
@@ -36,7 +36,7 @@
                 </el-input>
               </el-form-item>
             </el-row>
-          </el-form> -->
+          </el-form>
         </el-collapse-item>
       </el-collapse>
     </div>
@@ -52,7 +52,7 @@
         Dis: true,
         form: {
           peo: "",
-          area: null,
+          area: "",
           GDP: "",
           landfillNum: ""
         },
@@ -65,7 +65,7 @@
     },
     methods: {
       getInfo() {
-        let httpUrl = 'http://10.100.23.78:3000/search1';
+        let httpUrl = 'http://10.100.23.78:3001/search1';
         this.$axios.post(httpUrl).then(res => {
           this.form = res.data[0];
           console.log(this.form.area)
