@@ -8,11 +8,7 @@
     </el-menu-item>
     <el-menu-item class="left-action" index="/RSI" :route="{name:'RSI'}" style="height:70px">
       <img src="../../../../src/assets/img/icon_遥感影像.png" alt="logo">
-      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像</span>
-    </el-menu-item>
-    <el-menu-item class="left-action" index="/shp" :route="{name:'shp'}" style="height:70px">
-      <img src="../../../../src/assets/img/矢量图.png" alt="logo">
-      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">矢量</span>
+      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像矢量图</span>
     </el-menu-item>
     <el-menu-item class="left-action" index="/heatmap" :route="{name:'heatmap'}" style="height:70px">
       <img src="../../../../src/assets/img/热力图.png" alt="logo">
