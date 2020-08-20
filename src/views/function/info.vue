@@ -45,6 +45,7 @@
 </template>
 <script>
   import basicmap from '../map/basicMap'
+  import * as cityInfoAPI from '../../api/index'
   export default {
     data() {
       return {
@@ -56,19 +57,32 @@
           GDP: "",
           landfillNum: ""
         },
+        curCity: {
+          city: '', // 参数 firstName
+        }
 
       }
     },
+    computed: {
+      listenCity() {
+        return this.$store.state.city;
+      },
+    },
     created() {
-      this.getInfo();
-
+      this.getInfo(this.$store.state.city);
+    },
+    watch: {
+      listenCity: function (old, newd) {
+        // console.log('old'+old);
+        this.getInfo(old);
+      },
     },
     methods: {
-      getInfo() {
-        let httpUrl = 'http://10.100.23.78:3001/search1';
-        this.$axios.post(httpUrl).then(res => {
+      getInfo(city) {
+        this.curCity.city = city
+        cityInfoAPI.getCityInfo(this.curCity).then(res => {
           this.form = res.data[0];
-          console.log(this.form.area)
+          console.log(this.form)
         })
       }
 
@@ -87,7 +101,7 @@
 
   .air {
     z-index: 999;
-    width: 15%;
+    width: 18%;
     top: 10%;
     right: 3%;
     position: absolute;
