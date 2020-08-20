@@ -45,7 +45,7 @@
 </template>
 <script>
   import basicmap from '../map/basicMap'
-  import * as cityInfoAPI from '../../api/index'
+  import * as cityInfoAPI from '../../api/CityInfo'
   export default {
     data() {
       return {
