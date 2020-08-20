@@ -20,7 +20,7 @@ Vue.prototype.$qs = qs           //全局注册，使用方法为:this.qs
 // 不需要每次都 import一下 axios了，直接使用 $axios 即可
 Vue.prototype.$axios = Axios
 // step3：使每次请求都会带一个 /api 前缀
-// Axios.defaults.baseURL = '/api'
+Axios.defaults.baseURL = '/api'
 // 由于项目中有两个不同的地址需要请求，所以封装的http.js 默认的url不能设置
 
 new Vue({
