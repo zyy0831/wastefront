@@ -1,11 +1,19 @@
 <template>
   <div id="iot">
     <basicmap ref="map"></basicmap>
-    <div id="popup" class="ol-popup" style="width:400px">
+    <div id="popup" class="ol-popup" style="width:200px">
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-      <p>{{iotInfo.title}}</p>
-      <p>{{iotInfo.text}}</p>
-      <p>{{iotInfo.titleURL}}</p>
+      <el-form :model="iotInfoForm">
+        <el-form-item label="名称">
+          <span>{{iotInfoForm.Name}}</span>
+        </el-form-item>
+        <el-form-item label="属性">
+          <span>{{iotInfoForm.attr}}</span><span>计量单位</span>
+        </el-form-item>
+        <el-form-item label="类型">
+          <span>{{iotInfoForm.type}}</span>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
@@ -43,16 +51,17 @@
         pointLayer: null,
         featuresArr: [],
         overlay: null,
-        iotInfo: {
-          imgURL: '',
-          text: '',
-          title: '',
-          titleURL: '',
+        iotInfoForm: {
+          Name: '',
+          lat: '',
+          lon: '',
+          attr: '',
+          type: '',
         },
         old: ''
       }
     },
-    created(){
+    created() {
 
     },
     mounted() {
@@ -62,17 +71,17 @@
       this.addPopup();
     },
     methods: {
-      getIotCoord(){
-        IotInfoAPI.getIotInfo().then(res=>{
+      initMap() {
+        this.map = this.$store.state.map
+      },
+      getIotCoord() {
+        IotInfoAPI.getIotInfo().then(res => {
           let Coordinates = res.data;
           JSON.stringify(Coordinates)
           this.addPoints(Coordinates); //根据坐标点批量打点
-        }).catch(err=>
+        }).catch(err =>
           console.log(err)
         )
-      },
-      initMap() {
-        this.map = this.$store.state.map
       },
 
       /**
@@ -96,7 +105,7 @@
           });
           feature.setStyle(this.getIcon(coordinates[i].type));
           this.featuresArr.push(feature);
-        } // for 结束
+        }
         // 批量添加feature
         this.pointLayer.getSource().addFeatures(this.featuresArr);
       },
@@ -115,15 +124,6 @@
         });
         return styleIcon;
       },
-      /**
-       * 动态创建popup的具体内容
-       * @param {string} title
-       */
-      addFeatrueInfo(info) {
-        this.iotInfo.title = info.att.title;
-        this.iotInfo.text = info.att.text;
-        this.iotInfo.titleURL = info.att.titleURL;
-      },
       createdOverly() {
         let container = document.getElementById("popup");
         // 创建一个弹窗 Overlay 对象
@@ -140,26 +140,8 @@
       addPopup() {
         // 使用变量存储弹窗所需的 DOM 对象
         let closer = document.getElementById("popup-closer");
-        var beijing = [116.28, 39.54];
-        //示例标注点北京市的信息对象
-        var featuerInfo = {
-          geo: beijing,
-          att: {
-            title: "北京市(中华人民共和国首都)", //标注信息的标题内容
-            titleURL: "http://www.openlayers.org/", //标注详细信息链接
-            text: "北京（Beijing），简称京，中华人民共和国首都、直辖市，中国的政治、文化和国际交往中心……", //标注内容简介
-            imgURL: "../../images/label/bj.png" //标注的图片
-          }
-        }
+
         let _that = this;
-        /**
-         * 为弹窗添加一个响应关闭的函数
-         */
-        closer.onclick = function () {
-          _that.overlay.setPosition(undefined);
-          closer.blur();
-          return false;
-        };
 
         /**
          * 添加单击响应函数来处理弹窗动作
@@ -171,12 +153,15 @@
           var feature = _that.map.forEachFeatureAtPixel(evt.pixel, function (feature, layer) {
             return feature;
           });
-          if (feature) {
-            // console.log(feature)
-            // var a = feature.getGeometry();
-            // console.log('横坐标' + a.flatCoordinates[0] + '纵坐标' + a.flatCoordinates[1])
-            // console.log(feature.getGeometry().flatCoordinates)
-            _that.addFeatrueInfo(featuerInfo); //在popup中加载当前要素的具体信息
+          if (feature && feature.getGeometry().flatCoordinates.length < 3) {
+            let coord = feature.getGeometry().flatCoordinates
+            IotInfoAPI.getIotOneInfo(coord).then(res => {
+              _that.iotInfoForm = res.data[0] //在popup中加载当前要素的具体信息
+              _that.checkType(_that.iotInfoForm.type)
+            }).catch(err => {
+              console.log(err)
+            })
+
             // console.log(_that.overlay.getPosition())  //popup的坐标信息
             if (_that.overlay.getPosition() == undefined) {
               _that.overlay.setPosition(coordinate); //设置popup的位置
@@ -184,8 +169,12 @@
             } else if (feature.getGeometry().flatCoordinates != _that.old) {
               _that.overlay.setPosition(coordinate);
             }
+          } else if (feature && feature.getGeometry().flatCoordinates.length > 3) {
+            alert("您点击的是区划边界要素，请放大地图，重新点击")
+            _that.iotInfoForm = {}
           } else {
             _that.overlay.setPosition(undefined); //设置popup的位置
+            _that.iotInfoForm = {}
 
           }
         });
@@ -198,9 +187,27 @@
           var hit = _that.map.hasFeatureAtPixel(pixel);
           _that.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
         });
-
-
+        /**
+         * 为弹窗添加一个响应关闭的函数
+         */
+        closer.onclick = function () {
+          _that.overlay.setPosition(undefined);
+          _that.iotInfoForm = {};
+          closer.blur();
+          return false;
+        };
       },
+      checkType(para) {
+        console.log(para)
+        switch (para) {
+          case '0':
+            this.iotInfoForm.type = "压力传感器";
+            break;
+          case '1':
+            this.iotInfoForm.type = "倾斜传感器";
+            break;
+        }
+      }
 
     },
     components: {
