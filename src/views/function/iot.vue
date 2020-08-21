@@ -34,6 +34,8 @@
   import Overlay from "ol/Overlay";
 
   import basicmap from '../map/basicMap'
+  import * as IotInfoAPI from '../../api/iot'
+
   export default {
     data() {
       return {
@@ -47,52 +49,37 @@
           title: '',
           titleURL: '',
         },
-        iotCoordinates: [{
-            x: "113.066812",
-            y: "33.866359",
-            type: "lv"
-          },
-          {
-            x: "112.906703",
-            y: "33.740325",
-            type: "bule"
-          },
-          {
-            x: "112.845336",
-            y: "34.167408",
-            type: "lv"
-          },
-          {
-            x: "112.889885",
-            y: "33.901538",
-            type: "bule"
-          },
-          {
-            x: "113.299061",
-            y: "33.737579",
-            type: "lv"
-          }
-        ],
         old: ''
       }
     },
+    created(){
+
+    },
     mounted() {
       this.initMap();
-      this.getPoint();
+      this.getIotCoord();
       this.createdOverly();
       this.addPopup();
     },
     methods: {
+      getIotCoord(){
+        IotInfoAPI.getIotInfo().then(res=>{
+          let Coordinates = res.data;
+          JSON.stringify(Coordinates)
+          this.addPoints(Coordinates); //根据坐标点批量打点
+        }).catch(err=>
+          console.log(err)
+        )
+      },
       initMap() {
         this.map = this.$store.state.map
       },
-      getPoint() {
-        this.addPoints(this.iotCoordinates); //根据坐标点批量打点
-      },
+
       /**
        * 批量根据经纬度坐标打点
        */
       addPoints(coordinates) {
+        console.log(coordinates)
         // 设置图层
         this.pointLayer = new VectorLayer({
           source: new VectorSource()
@@ -104,7 +91,7 @@
           // 创建feature，一个feature就是一个点坐标信息
           let feature = new Feature({
             geometry: new Point(
-              [coordinates[i].x, coordinates[i].y]
+              [coordinates[i].lon, coordinates[i].lat]
             )
           });
           feature.setStyle(this.getIcon(coordinates[i].type));
@@ -115,15 +102,15 @@
       },
       getIcon(type) {
         let src = "";
-        type == "bule" ?
-          (src = require("../../assets/img/logo.png")) :
-          (src = require("../../assets/img/locationMap.png"));
+        type == "1" ?
+          (src = require("../../assets/img/marker/iotGreen.png")) :
+          (src = require("../../assets/img/marker/iotRed.png"));
         let styleIcon = new Style({
           // 设置图片效果
           image: new Icon({
             src: src,
             anchor: [1, 1],
-            scale: 0.2,
+            scale: 0.15,
           })
         });
         return styleIcon;
@@ -137,7 +124,7 @@
         this.iotInfo.text = info.att.text;
         this.iotInfo.titleURL = info.att.titleURL;
       },
-      createdOverly(){
+      createdOverly() {
         let container = document.getElementById("popup");
         // 创建一个弹窗 Overlay 对象
         this.overlay = new Overlay({
@@ -147,7 +134,7 @@
             duration: 250 //自动平移效果的动画时间 9毫秒
           }
         });
-         // 将弹窗添加到 map 地图中
+        // 将弹窗添加到 map 地图中
         this.map.addOverlay(this.overlay);
       },
       addPopup() {
