@@ -107,33 +107,6 @@
       this.addArea(sz_psq);
       this.addArea(sz_ytq);
       this.addArea(nosubpds)
-      let coordinates = [{
-          x: "106.918082",
-          y: "31.441314",
-          type: "lv",
-        },
-        {
-          x: "86.36158200334317",
-          y: "41.42448570787448",
-          type: "bule",
-        },
-        {
-          x: "89.71757707811526",
-          y: "31.02619817424643",
-          type: "lv",
-        },
-        {
-          x: "116.31694544853109",
-          y: "39.868508850821115",
-          type: "bule",
-        },
-        {
-          x: "103.07940932026341",
-          y: "30.438580338450862",
-          type: "lv",
-        },
-      ];
-      // this.addPoints(coordinates);//根据坐标点批量打点
     },
     watch: {
       listenPoint: function (old, newd) {
@@ -266,42 +239,6 @@
           })
         );
         this.areaLayer.getSource().addFeatures([areaFeature]);
-      },
-      /**
-       * 批量根据经纬度坐标打点
-       */
-      addPoints(coordinates) {
-        // 设置图层
-        this.pointLayer = new VectorLayer({
-          source: new VectorSource(),
-        });
-        // 添加图层
-        this.map.addLayer(this.pointLayer);
-        // 循环添加feature
-        for (let i = 0; i < coordinates.length; i++) {
-          // 创建feature，一个feature就是一个点坐标信息
-          let feature = new Feature({
-            geometry: new Point([coordinates[i].x, coordinates[i].y]),
-          });
-          feature.setStyle(this.getIcon(coordinates[i].type));
-          this.featuresArr.push(feature);
-        } // for 结束
-        // 批量添加feature
-        this.pointLayer.getSource().addFeatures(this.featuresArr);
-      },
-      getIcon(type) {
-        let src = "";
-        type == "bule" ?
-          (src = require("../../assets/img/logo.png")) :
-          (src = require("../../assets/img/locationMap.png"));
-        var styleIcon = new Style({
-          // 设置图片效果
-          image: new Icon({
-            src: src,
-            anchor: [1, 1],
-          }),
-        });
-        return styleIcon;
       },
     },
   };
