@@ -10,7 +10,7 @@
       <img src="../../../../src/assets/img/icon_遥感影像.png" alt="logo">
       <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像/监测结果识别</span>
     </el-menu-item>
-    <el-menu-item class="left-action" index="/4-2" style="height:70px">
+    <el-menu-item class="left-action" index="/facility" :route="{name:'facility'}" style="height:70px">
       <img>
       <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">监管数据</span>
     </el-menu-item>
@@ -38,6 +38,10 @@
 </template>
 <script>
   export default {
+    data() {
+      return {
+      }
+    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
