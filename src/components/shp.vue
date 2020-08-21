@@ -82,7 +82,7 @@
               serverType: "geoserver",
             }),
           }),
-          this.map.addLayer(this.wmsLayer);
+        this.map.addLayer(this.wmsLayer);
         this.map.on('click', this.mapClick);
       },
       show() {

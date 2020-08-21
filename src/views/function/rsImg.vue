@@ -120,7 +120,7 @@ export default {
         this.map.addLayer(this.layer_wms_tiff);
     },
     show() {
-      this.checked1 = !this.checked1;
+      // this.checked1 = !this.checked1;
       this.layer_wms_tiff.setVisible(this.checked1);
     },
     mapClick: function (evt) {
