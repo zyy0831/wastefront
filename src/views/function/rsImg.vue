@@ -1,6 +1,7 @@
 <template>
   <div id="shpDiv">
     <basicmap ref="map"></basicmap>
+    <el-button class="airSel" @click="Query">默认按钮</el-button>
     <el-form class="airRight" :label-position="labelPosition">
       <el-form-item label="切换遥感影像"></el-form-item>
       <el-form-item label="01">
@@ -8,12 +9,6 @@
       </el-form-item>
     </el-form>
     <el-form class="airLeft" :label-position="labelPosition" :model="form">
-      <!-- <el-form-item label="名称" class="good">
-        <p>{{name}}</p>
-      </el-form-item>
-      <el-form-item label="面积" class="good">
-        <p>{{area}}</p>
-      </el-form-item>-->
       <el-form-item label="地址">
         <el-input v-model="form.Address"></el-input>
       </el-form-item>
@@ -51,6 +46,9 @@ import { Style, Stroke, Fill, Icon } from "ol/style";
 import { Point, Polygon, MultiPolygon } from "ol/geom";
 import { circular } from "ol/geom/Polygon";
 import Overlay from "ol/Overlay";
+import {GeoJSON,WFS} from 'ol/format';
+import {equalTo} from 'ol/format/filter';
+import {bbox} from 'ol/loadingstrategy';
 export default {
   data() {
     return {
@@ -58,6 +56,7 @@ export default {
       map: null,
       layer_wms_tiff: null,
       layer_wms_shp: null,
+      wfsVectorLayer: null,
       url_geoser: "http://10.100.18.67:8080/geoserver/cite/wms?service=WMS",
       checked1: true,
       form: {
@@ -75,6 +74,7 @@ export default {
     this.initMap();
     this.getWMS_tiff();
     this.getWMS_shp();
+    // this.getWFS();
   },
   methods: {
     getWMS_shp() {
@@ -95,7 +95,29 @@ export default {
         }),
       })),
         this.map.addLayer(this.layer_wms_shp);
-    },
+      },
+      getWFS() {
+        //创建wfs资源
+        let wfsVectorSource = new VectorSource({
+          format: new GeoJSON(),
+          projection: 'EPSG:4326',
+          url: 'http://10.100.18.67:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite%3A0820-5&maxFeatures=50&outputFormat=application%2Fjson',
+          strategy: bbox
+        });
+        console.log(wfsVectorSource);
+        //创建wfs图层，注意需要设置好描边样式，否则不展示效果出来
+        this.wfsVectorLayer = new VectorLayer({
+          source: wfsVectorSource,
+          style: new Style({
+            stroke: new Stroke({
+              color: 'blue',
+              width: 2
+            })
+          }),
+          visible: true
+        });
+        this.map.addLayer(this.wfsVectorLayer);
+      },
     initMap() {
       this.map = this.$store.state.map;
       this.map.on("click", this.mapClick);
@@ -125,37 +147,60 @@ export default {
     },
     mapClick: function (evt) {
       let _that = this;
-      // let feature = _that.map.forEachFeatureAtPixel(evt.pixel, function (
-      //   feature,
-      //   layer
-      // ) {
-      //   return layer;
-      // });
-      // // console.log(feature);
-      let viewResolution = _that.map.getView().getResolution();
-      let url_wms_Shp = _that.layer_wms_shp
-        .getSource()
-        .getFeatureInfoUrl(evt.coordinate, viewResolution, "EPSG:4326", {
-          INFO_FORMAT: "application/json",
+        let viewResolution = _that.map.getView().getResolution();
+        let url_wms_Shp = _that.layer_wms_shp
+          .getSource()
+          .getFeatureInfoUrl(evt.coordinate, viewResolution, "EPSG:4326", {
+            INFO_FORMAT: "application/json",
+          });
+        // console.log(_that.layer_wms_tiff.get('name'))
+        // console.log(_that.map.getLayers().array_)
+        this.$axios({
+            method: "get",
+            url: url_wms_Shp,
+          })
+          .then((res) => {
+            console.log(res.data.features[0].properties);
+            this.form = res.data.features[0].properties;
+            // this.name = res.data.features[0].properties.name;
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      },
+      //属性查询
+      Query() {
+        let vectorSource = new VectorSource();
+        let vector = new VectorLayer({
+          source: vectorSource,
+          style: new Style({
+            stroke: new Stroke({
+              color: 'rgba(0, 0, 255, 1.0)',
+              width: 5,
+            }),
+          }),
         });
-      // console.log(_that.layer_wms_tiff.get('name'))
-      // console.log(url_wms_Shp);
-      // console.log(_that.map.getLayers().array_)
-      this.$axios({
-        method: "get",
-        url: url_wms_Shp,
-      })
-        .then((res) => {
-          console.log(res.data.features[0].properties);
-          this.form = res.data.features[0].properties;
-          // this.name = res.data.features[0].properties.name;
-          // // console.log(res.data.features[0].geometry.coordinates)
-          // this.area = res.data.features[0].properties.area;
-        })
-        .catch((err) => {
-          console.log(err);
+        // 创建一个请求
+        let featureRequest = new WFS().writeGetFeature({
+          srsName: 'EPSG:4326',
+          featureNS: 'http://www.opengeospatial.net/cite',
+          featurePrefix: 'cite',
+          featureTypes: ['cite:0820-5'],
+          outputFormat: 'application/json',
+          filter: equalTo('Type', '工程泥浆')
         });
-    },
+        // 发送请求
+        fetch('http://10.100.18.67:8080/geoserver/wfs', {
+          method: 'POST',
+          body: new XMLSerializer().serializeToString(featureRequest),
+        }).then(res => {
+          return res.json();
+        }).then(json => {
+          let features = new GeoJSON().readFeatures(json);
+          vectorSource.addFeatures(features);
+        });
+        this.map.addLayer(vector)
+      }
   },
   components: {
     basicmap: basicmap,
@@ -178,6 +223,19 @@ export default {
   opacity: 0.9;
   background-color: white;
 }
+
+  .airSel {
+    z-index: 999;
+    width: 15%;
+    top: 25%;
+    right: 3%;
+    position: absolute;
+    /* background-color: rgb(25, 202, 54); */
+    opacity: 0.9;
+    background-color: white;
+
+  }
+
 .airLeft {
   z-index: 999;
   width: 25%;
