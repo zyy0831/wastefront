@@ -4,11 +4,15 @@
   <el-menu class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose" style="background: #298ff5;top:10px;">
     <el-menu-item class="left-action" index="/info" :route="{name:'info'}" style="height:70px">
       <img src="../../../../src/assets/img/城市搜索.png" alt="logo">
-      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">城市信息</span>
+      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">示范城市</span>
     </el-menu-item>
     <el-menu-item class="left-action" index="/RSI" :route="{name:'RSI'}" style="height:70px">
       <img src="../../../../src/assets/img/icon_遥感影像.png" alt="logo">
-      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像矢量图</span>
+      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像/监测结果识别</span>
+    </el-menu-item>
+    <el-menu-item class="left-action" index="/facility" :route="{name:'facility'}" style="height:70px">
+      <img>
+      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">监管数据</span>
     </el-menu-item>
     <el-menu-item class="left-action" index="/heatmap" :route="{name:'heatmap'}" style="height:70px">
       <img src="../../../../src/assets/img/热力图.png" alt="logo">
@@ -34,6 +38,10 @@
 </template>
 <script>
   export default {
+    data() {
+      return {
+      }
+    },
     methods: {
       handleOpen(key, keyPath) {
         console.log(key, keyPath);

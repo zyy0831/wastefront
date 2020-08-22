@@ -11,16 +11,16 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api': {
-      //   // 此处的写法，目的是为了 将 /api 替换成 https://www.baidu.com/
-      //   target: 'https://www.baidu.com/',
-      //   // 允许跨域
-      //   changeOrigin: true,
-      //   ws: true,
-      //   pathRewrite: {
-      //       '^/api': ''
-      //   }
-    // }
+      '/api': {
+        // 此处的写法，目的是为了 将 /api 替换成 https://www.baidu.com/  http://10.100.23.78:3000
+        target: 'http://10.100.23.78:3000/',
+        // 允许跨域
+        changeOrigin: true,
+        ws: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
     },
 
     // Various Dev Server settings

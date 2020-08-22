@@ -6,6 +6,7 @@ let store=new Vuex.Store({
     // count:1,
     mainPoint:[114.052857, 22.545676],
     map:'',
+    city:'sz',
   }
 
 })

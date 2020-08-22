@@ -1,17 +1,17 @@
 <template>
   <div id="iot">
     <basicmap ref="map"></basicmap>
-    <div id="popup" class="ol-popup" style="width:200px">
-      <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-      <el-form :model="iotInfoForm">
+    <div class="ol-popup" style="width:200px">
+      <h3>设施信息展示</h3>
+      <el-form :model="facInfoForm" v-show="vis">
         <el-form-item label="名称">
-          <span>{{iotInfoForm.Name}}</span>
+          <span>{{facInfoForm.Name}}</span>
         </el-form-item>
-        <el-form-item label="属性">
-          <span>{{iotInfoForm.attr}}</span><span>计量单位</span>
+        <el-form-item label="地址">
+          <span>{{facInfoForm.location}}</span>
         </el-form-item>
         <el-form-item label="类型">
-          <span>{{iotInfoForm.type}}</span>
+          <span>{{facInfoForm.Attr}}</span>
         </el-form-item>
       </el-form>
     </div>
@@ -42,7 +42,7 @@
   import Overlay from "ol/Overlay";
 
   import basicmap from '../map/basicMap'
-  import * as IotInfoAPI from '../../api/iot'
+  import * as facAPI from '../../api/facility'
 
   export default {
     data() {
@@ -51,14 +51,15 @@
         pointLayer: null,
         featuresArr: [],
         overlay: null,
-        iotInfoForm: {
+        facInfoForm: {
           Name: '',
           lat: '',
           lon: '',
-          attr: '',
-          type: '',
+          location: '',
+          Attr: '',
         },
-        old: ''
+        old: '',
+        vis:true
       }
     },
     created() {
@@ -67,7 +68,6 @@
     mounted() {
       this.initMap();
       this.getIotCoord();
-      this.createdOverly();
       this.addPopup();
     },
     methods: {
@@ -75,7 +75,7 @@
         this.map = this.$store.state.map
       },
       getIotCoord() {
-        IotInfoAPI.getIotInfo().then(res => {
+        facAPI.getFacInfo().then(res => {
           let Coordinates = res.data;
           JSON.stringify(Coordinates)
           this.addPoints(Coordinates); //根据坐标点批量打点
@@ -103,7 +103,7 @@
               [coordinates[i].lon, coordinates[i].lat]
             )
           });
-          feature.setStyle(this.getIcon(coordinates[i].type));
+          feature.setStyle(this.getIcon(coordinates[i].Attr));
           this.featuresArr.push(feature);
         }
         // 批量添加feature
@@ -112,8 +112,8 @@
       getIcon(type) {
         let src = "";
         type == "1" ?
-          (src = require("../../assets/img/marker/iotGreen.png")) :
-          (src = require("../../assets/img/marker/iotRed.png"));
+          (src = require("../../assets/img/marker/facBlue.png")) :
+          (src = require("../../assets/img/marker/facRed.png"));
         let styleIcon = new Style({
           // 设置图片效果
           image: new Icon({
@@ -124,23 +124,7 @@
         });
         return styleIcon;
       },
-      createdOverly() {
-        let container = document.getElementById("popup");
-        // 创建一个弹窗 Overlay 对象
-        this.overlay = new Overlay({
-          element: container, //绑定 Overlay 对象和 DOM 对象的
-          autoPan: true, // 定义弹出窗口在边缘点击时候可能不完整 设置自动平移效果
-          autoPanAnimation: {
-            duration: 250 //自动平移效果的动画时间 9毫秒
-          }
-        });
-        // 将弹窗添加到 map 地图中
-        this.map.addOverlay(this.overlay);
-      },
       addPopup() {
-        // 使用变量存储弹窗所需的 DOM 对象
-        let closer = document.getElementById("popup-closer");
-
         let _that = this;
 
         /**
@@ -155,26 +139,18 @@
           });
           if (feature && feature.getGeometry().flatCoordinates.length < 3) {
             let coord = feature.getGeometry().flatCoordinates
-            IotInfoAPI.getIotOneInfo(coord).then(res => {
-              _that.iotInfoForm = res.data[0] //在popup中加载当前要素的具体信息
-              _that.checkType(_that.iotInfoForm.type)
+            facAPI.getFacOneInfo(coord).then(res => {
+              _that.facInfoForm = res.data[0] //在popup中加载当前要素的具体信息
+              _that.checkType(_that.facInfoForm.Attr)
             }).catch(err => {
               console.log(err)
             })
-
-            // console.log(_that.overlay.getPosition())  //popup的坐标信息
-            if (_that.overlay.getPosition() == undefined) {
-              _that.overlay.setPosition(coordinate); //设置popup的位置
-              _that.old = feature.getGeometry().flatCoordinates
-            } else if (feature.getGeometry().flatCoordinates != _that.old) {
-              _that.overlay.setPosition(coordinate);
-            }
           } else if (feature && feature.getGeometry().flatCoordinates.length > 3) {
             alert("您点击的是区划边界要素，请放大地图，重新点击")
-            _that.iotInfoForm = {}
+            _that.facInfoForm = {}
           } else {
             _that.overlay.setPosition(undefined); //设置popup的位置
-            _that.iotInfoForm = {}
+            _that.facInfoForm = {}
 
           }
         });
@@ -187,24 +163,15 @@
           var hit = _that.map.hasFeatureAtPixel(pixel);
           _that.map.getTargetElement().style.cursor = hit ? 'pointer' : '';
         });
-        /**
-         * 为弹窗添加一个响应关闭的函数
-         */
-        closer.onclick = function () {
-          _that.overlay.setPosition(undefined);
-          _that.iotInfoForm = {};
-          closer.blur();
-          return false;
-        };
       },
       checkType(para) {
         console.log(para)
         switch (para) {
           case '0':
-            this.iotInfoForm.type = "压力传感器";
+            this.facInfoForm.Attr = "填埋场";
             break;
           case '1':
-            this.iotInfoForm.type = "倾斜传感器";
+            this.facInfoForm.Attr = "资源化设施";
             break;
         }
       }
@@ -224,51 +191,10 @@
 
   .ol-popup {
     position: absolute;
+    top:15%;
+    right: 5%;
+    z-index: 999;
     background-color: white;
-    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #cccccc;
-    bottom: 12px;
-    left: -50px;
-  }
-
-  .ol-popup:after,
-  .ol-popup:before {
-    top: 100%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-  }
-
-  .ol-popup:after {
-    border-top-color: white;
-    border-width: 10px;
-    left: 48px;
-    margin-left: -10px;
-  }
-
-  .ol-popup:before {
-    border-top-color: #cccccc;
-    border-width: 11px;
-    left: 48px;
-    margin-left: -11px;
-  }
-
-  .ol-popup-closer {
-    text-decoration: none;
-    position: absolute;
-    top: 2px;
-    right: 8px;
-  }
-
-
-  .ol-popup-closer:after {
-    content: "✖";
   }
 
 </style>
