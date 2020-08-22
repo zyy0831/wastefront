@@ -17,13 +17,13 @@
       </el-table-column>
     </el-table>
     <el-dialog title="提示  " :visible.sync="dialogVisible" width="60%" :before-close="handleClose">
-      <el-table :data="tableData" border style="width: 100%">
+      <el-table :data="tableData" border styles="width: 100%">
         <el-table-column fixed prop="date" label="日期" width="150"></el-table-column>
         <el-table-column prop="name" label="姓名" width="120"></el-table-column>
           <template>
             <el-button type="text" @click="dialogVisible = true">查看</el-button>
           </template>
-        </el-table-column>
+       
       </el-table>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
