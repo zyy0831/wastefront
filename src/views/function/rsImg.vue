@@ -130,7 +130,7 @@ export default {
           url: 'http://10.100.18.67:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite%3A0820-5&maxFeatures=50&outputFormat=application%2Fjson',
           strategy: bbox
         });
-        console.log(wfsVectorSource);
+        // console.log(wfsVectorSource);
         //创建wfs图层，注意需要设置好描边样式，否则不展示效果出来
         this.wfsVectorLayer = new VectorLayer({
           source: wfsVectorSource,
@@ -142,7 +142,7 @@ export default {
           }),
           visible: true
         });
-        console.log(this.wfsVectorLayer);
+        // console.log(this.wfsVectorLayer);
         this.map.addLayer(this.wfsVectorLayer);
       },
     initMap() {
@@ -187,7 +187,7 @@ export default {
             url: url_wms_Shp,
           })
           .then((res) => {
-            console.log(res.data.features[0].properties);
+            // console.log(res.data.features[0].properties);
             this.form = res.data.features[0].properties;
             // this.name = res.data.features[0].properties.name;
           })
@@ -268,10 +268,10 @@ export default {
 
 .airLeft {
   z-index: 999;
-  width: 25%;
+  width: 20%;
   height: 80%;
   top: 10%;
-  right: 59%;
+  right: 65%;
   position: absolute;
   /* background-color: rgb(25, 202, 54); */
   opacity: 0.9;
