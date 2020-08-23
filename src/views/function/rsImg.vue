@@ -1,7 +1,12 @@
 <template>
   <div id="shpDiv">
     <basicmap ref="map"></basicmap>
-    <el-button class="airSel" @click="Query">默认按钮</el-button>
+    <el-card class="airSel">
+      <el-select v-model="filterPropName" placeholder="请选择" @change="Query(filterPropName)">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+    </el-card>
     <el-form class="airRight" :label-position="labelPosition">
       <el-form-item label="切换遥感影像"></el-form-item>
       <el-form-item label="01">
@@ -57,8 +62,11 @@ export default {
       layer_wms_tiff: null,
       layer_wms_shp: null,
       wfsVectorLayer: null,
+        vector: null,
+        vectorSource: null,
       url_geoser: "http://10.100.18.67:8080/geoserver/cite/wms?service=WMS",
       checked1: true,
+        featuresGeo: null,
       form: {
         Address: "", //地址
         Area: "", //面积
@@ -68,6 +76,24 @@ export default {
         Type: "", //类型
         Vol: "", //体积
       },
+        options: [{
+          value: '工程渣土',
+          label: '工程渣土'
+        }, {
+          value: '工程泥浆',
+          label: '工程泥浆'
+        }, {
+          value: '拆房垃圾',
+          label: '拆房垃圾'
+        }, {
+          value: '工程垃圾',
+          label: '工程垃圾'
+        }, {
+          value: '装修垃圾',
+          label: '装修垃圾'
+        }
+        ],
+        filterPropName: ''
     };
   },
   mounted() {
@@ -116,6 +142,7 @@ export default {
           }),
           visible: true
         });
+        console.log(this.wfsVectorLayer);
         this.map.addLayer(this.wfsVectorLayer);
       },
     initMap() {
@@ -169,10 +196,13 @@ export default {
           });
       },
       //属性查询
-      Query() {
-        let vectorSource = new VectorSource();
-        let vector = new VectorLayer({
-          source: vectorSource,
+      Query(val) {
+        if(this.featuresGeo != null){
+          this.vector.getSource().clear(); //清楚图层中的要素
+        }
+        this.vectorSource = new VectorSource();
+        this.vector = new VectorLayer({
+          source: this.vectorSource,
           style: new Style({
             stroke: new Stroke({
               color: 'rgba(0, 0, 255, 1.0)',
@@ -187,7 +217,7 @@ export default {
           featurePrefix: 'cite',
           featureTypes: ['cite:0820-5'],
           outputFormat: 'application/json',
-          filter: equalTo('Type', '工程泥浆')
+          filter: equalTo('Type', val)
         });
         // 发送请求
         fetch('http://10.100.18.67:8080/geoserver/wfs', {
@@ -196,10 +226,10 @@ export default {
         }).then(res => {
           return res.json();
         }).then(json => {
-          let features = new GeoJSON().readFeatures(json);
-          vectorSource.addFeatures(features);
+          this.featuresGeo = new GeoJSON().readFeatures(json);
+          this.vectorSource.addFeatures(this.featuresGeo);
         });
-        this.map.addLayer(vector)
+        this.map.addLayer(this.vector)
       }
   },
   components: {
@@ -247,4 +277,5 @@ export default {
   opacity: 0.9;
   background-color: white;
 }
+
 </style>
