@@ -72,7 +72,7 @@
         view: null,
         areaLayer: null,
         mapCenter: this.$store.state.mainPoint, //地图中心点，默认——深圳
-        mapZoom: 8,
+        mapZoom: 9,
         // [114.052857, 22.545676] 深圳
 
         pointLayer: null,
@@ -194,9 +194,11 @@
       changeCity(xy) {
         // console.log(JSON.stringify(xy))
         if(xy[0]==114.052857){
-          this.$store.state.city ='sz'
+          this.$store.state.city ='sz';
+          this.view.setZoom(10);
         }else{
-          this.$store.state.city ='pds'
+          this.$store.state.city ='pds';
+          this.view.setZoom(9);
         }
         this.view.setCenter(xy);
       },
