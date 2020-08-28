@@ -64,7 +64,7 @@ export default {
       wfsVectorLayer: null,
         vector: null,
         vectorSource: null,
-      url_geoser: "http://10.100.18.67:8080/geoserver/cite/wms?service=WMS",
+      url_geoser: "http://10.100.18.67:8080/geoserver/wastr/wms?service=WMS",
       checked1: true,
         featuresGeo: null,
       form: {
@@ -98,7 +98,8 @@ export default {
   },
   mounted() {
     this.initMap();
-    this.getWMS_tiff();
+    this.getWMS_tiff("wastr:pingdingshan201904031");
+    // this.getWMS_tiff();
     this.getWMS_shp();
     // this.getWFS();
   },
@@ -110,7 +111,7 @@ export default {
           params: {
             FORMAT: "image/png",
             VERSION: "1.1.0",
-            LAYERS: "	cite:0820-5",
+            LAYERS: "wastr:Export_Output",
             TILED: true,
             STYLES: "",
             transparent: true,
@@ -127,7 +128,7 @@ export default {
         let wfsVectorSource = new VectorSource({
           format: new GeoJSON(),
           projection: 'EPSG:4326',
-          url: 'http://10.100.18.67:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite%3A0820-5&maxFeatures=50&outputFormat=application%2Fjson',
+          url: 'http://localhost:8080/geoserver/wastr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=wastr%3AExport_Output&maxFeatures=50&outputFormat=application%2Fjson',
           strategy: bbox
         });
         // console.log(wfsVectorSource);
@@ -149,14 +150,14 @@ export default {
       this.map = this.$store.state.map;
       this.map.on("click", this.mapClick);
     },
-    getWMS_tiff() {
+    getWMS_tiff(tiffInput) {
       (this.layer_wms_tiff = new TileLayer({
         visible: this.checked1,
         source: new TileWMS({
           params: {
             FORMAT: "image/png",
             VERSION: "1.1.0",
-            LAYERS: "	cite:pingdingshan-2",
+            LAYERS: tiffInput,
             TILED: true,
             STYLES: "",
             transparent: true,
@@ -213,9 +214,9 @@ export default {
         // 创建一个请求
         let featureRequest = new WFS().writeGetFeature({
           srsName: 'EPSG:4326',
-          featureNS: 'http://www.opengeospatial.net/cite',
-          featurePrefix: 'cite',
-          featureTypes: ['cite:0820-5'],
+          featureNS: 'http://www.openplans.org/wastr', //修改为工作区URL
+          featurePrefix: 'wastr', //名字
+          featureTypes: ['wastr:Export_Output'], //名字
           outputFormat: 'application/json',
           filter: equalTo('Type', val)
         });
