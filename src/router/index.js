@@ -40,11 +40,6 @@ const routes = [
         component: () => import('../views/function/facility.vue')
       },
       {
-        path:'/heatmap', // 热力图
-        name:'heatmap',
-        component: () => import('../views/function/heatMap.vue')
-      },
-      {
         path:'/iot', // 物联网
         name:'iot',
         component: () => import('../views/function/iot.vue')
@@ -69,7 +64,32 @@ const routes = [
         name:'lawsReg',
         component: () => import('../views/infoSearch/lawsReg.vue')
       },
-    ]
+      {
+        path:'/Buffer analysis', //
+        name:'Buffer analysis',
+        component: () => import('../views/spatial analysis/Buffer analysis.vue')
+      },      
+      {
+        path:'/heatmap', //
+        name:'heatmap',
+        component: () => import('../views/spatial analysis/heatmap.vue')
+      },
+      {
+        path:'/Spatial measurement', //
+        name:'Spatial measurement',
+        component: () => import('../views/spatial analysis/Spatial measurement.vue')
+      },
+      {
+        path:'/three', //
+        name:'three',
+        component: () => import('../views/function/three.vue')
+      },
+      {
+        path:'/guangpu', //
+        name:'guangpu',
+        component: () => import('../views/function/guangpu.vue')
+      },
+      ]
   },
 ];
 

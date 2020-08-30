@@ -86,7 +86,7 @@
     },
     mounted() {
       this.loadMap();
-      this.addArea(szNoSub); //添加区域图层方法
+      this.addArea_nu(szNoSub); //添加区域图层方法
       this.addArea(p_bf);
       this.addArea(p_lushan);
       this.addArea(p_rz);
@@ -106,7 +106,7 @@
       this.addArea(sz_nsq);
       this.addArea(sz_psq);
       this.addArea(sz_ytq);
-      this.addArea(nosubpds)
+      this.addArea_nu(nosubpds)
     },
     watch: {
       listenPoint: function (old, newd) {
@@ -230,11 +230,48 @@
         });
         areaFeature.setStyle(
           new Style({
+            fill: new Fill({
+              color: "#4e98f444"
+            }),
+            stroke: new Stroke({
+              width: 5,
+              color: [1777, 137, 227, 1],
+              lineDash: [4],
+            }),
+          })
+        );
+        this.areaLayer.getSource().addFeatures([areaFeature]);
+      },
+      addArea_nu(geo = []) {
+        if (geo.length == 0) return false;
+        let areaFeature = null;
+        // 设置图层
+        this.areaLayer = new VectorLayer({
+          source: new VectorSource({
+            features: [],
+          }),
+        });
+        // 添加图层
+        this.map.addLayer(this.areaLayer);
+        geo.forEach((g) => {
+          let lineData = g.features[0];
+          if (lineData.geometry.type == "MultiPolygon") {
+            areaFeature = new Feature({
+              geometry: new MultiPolygon(lineData.geometry.coordinates),
+            });
+          } else if (lineData.geometry.type == "Polygon") {
+            areaFeature = new Feature({
+              geometry: new Polygon(lineData.geometry.coordinates),
+            });
+          }
+        });
+        areaFeature.setStyle(
+          new Style({
             // fill: new Fill({
             //   color: "#4e98f444"
             // }),
             stroke: new Stroke({
-              width: 3,
+              width: 8,
               color: [71, 137, 227, 1],
               lineDash: [4],
             }),

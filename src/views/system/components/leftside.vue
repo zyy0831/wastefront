@@ -14,10 +14,7 @@
       <img>
       <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">监管数据</span>
     </el-menu-item>
-    <el-menu-item class="left-action" index="/heatmap" :route="{name:'heatmap'}" style="height:70px">
-      <img src="../../../../src/assets/img/热力图.png" alt="logo">
-      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">热力图</span>
-    </el-menu-item>
+
     <el-menu-item class="left-action" index="/iot" :route="{name:'iot'}" style="height:70px">
       <img src="../../../../src/assets/img/物联网 (2).png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">物联网监测</span>
@@ -34,6 +31,24 @@
       <el-menu-item class="left-action" index="/lawsReg" :route="{name:'lawsReg'}" style="color:	#FFFFFF;font-size:20px;">法律法规
       </el-menu-item>
     </el-submenu>
+        <el-submenu class="left-action" index="1" style="height:70px">
+      <template class="left-action"  slot="title">
+        <img src="../../../../src/assets/img/查询 (2).png" alt="logo">
+        <span  class="left-action" style="color:	#FFFFFF;font-size:25px;font-weight:bold"> 空间分析</span>
+      </template>
+      <el-menu-item class="left-action" index="/Buffer analysis" :route="{name:'Buffer analysis'}" style="color:	#FFFFFF;font-size:20px;"> 缓冲区分析
+       </el-menu-item>
+      <el-menu-item class="left-action" index="/heatmap" :route="{name:'heatmap'}" style="color:	#FFFFFF;font-size:20px;">热力图分析</el-menu-item>
+      <el-menu-item class="left-action" index="/Spatial measurement" :route="{name:'Spatial measurement'}" style="color:	#FFFFFF;font-size:20px;">空间量测</el-menu-item>
+
+    </el-submenu>
+   <el-menu-item class="left-action" index="/three" :route="{name:'three'}" style="height:70px">
+      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">三维系统</span>
+    </el-menu-item>
+       <el-menu-item class="left-action" index="/guangpu" :route="{name:'guangpu'}" style="height:70px">
+      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">光谱库</span>
+    </el-menu-item>
+    
   </el-menu>
 </template>
 <script>
