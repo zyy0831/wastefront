@@ -1,6 +1,7 @@
 <template>
   <div>
-    
+    <!-- <img src="http://localhost:3000/static/images/test.jpg"> -->
+    <img :src=imgSrc>
     <el-table :data="tableData" border style="width: 100%">
       <el-table-column fixed prop="date" label="序号" width="150"></el-table-column>
       <el-table-column prop="name" label="上报月份" width="120"></el-table-column>
@@ -34,7 +35,7 @@
   </div>
 </template>
 <script>
-  import * as fileDownAPI from '../../api/fileDown'
+  import * as getPathAPI from '../../api/getPath'
   export default {
     data() {
       return {
@@ -85,6 +86,8 @@
           },
         ],
         dialogVisible: false,
+        serverPath:"http://localhost:3000/static",
+        imgSrc:'',
       };
     },
     methods: {
@@ -97,10 +100,22 @@
           .catch((_) => {});
       },
       downFile() {
+        const servPath = 'http://10.100.23.78:3000/download/downFile/'
         let id = '1';
-        window.location.href='http://10.100.23.78:3000/download/downFile/'+id
+        window.location.href = servPath + id;
+      },
+      getImgPath(id){
+        getPathAPI.getImgPath(id).then(res=>{
+          this.imgSrc = this.serverPath + res.data
+        }).catch(err=>{
+          console.log(err);
+        })
+
       }
     },
+    mounted(){
+      this.getImgPath(1);
+    }
   };
 
 </script>
