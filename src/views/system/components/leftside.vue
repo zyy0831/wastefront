@@ -6,10 +6,12 @@
       <img src="../../../../src/assets/img/城市搜索.png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">示范城市</span>
     </el-menu-item>
+    
     <el-menu-item class="left-action" index="/RSI" :route="{name:'RSI'}" style="height:70px">
       <img src="../../../../src/assets/img/icon_遥感影像.png" alt="logo">
       <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像/监测结果识别</span>
     </el-menu-item>
+
     <el-menu-item class="left-action" index="/facility" :route="{name:'facility'}" style="height:70px">
       <img>
       <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">监管数据</span>
@@ -19,32 +21,33 @@
       <img src="../../../../src/assets/img/物联网 (2).png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">物联网监测</span>
     </el-menu-item>
-    <el-submenu class="left-action" index="1" style="height:70px">
+
+    <el-submenu class="left-action" index="1" >
       <template class="left-action"  slot="title">
         <img src="../../../../src/assets/img/查询 (2).png" alt="logo">
         <span  class="left-action" style="color:	#FFFFFF;font-size:25px;font-weight:bold"> 数据查询</span>
       </template>
-      <el-menu-item class="left-action" index="/checkRes" :route="{name:'checkRes'}" style="color:	#FFFFFF;font-size:20px;"> 存量排查
+           <el-menu-item class="left-action" index="/checkRes" :route="{name:'checkRes'}" style="color:	#FFFFFF;font-size:20px;"> 存量排查
        </el-menu-item>
       <el-menu-item class="left-action" index="/annualData" :route="{name:'annualData'}" style="color:	#FFFFFF;font-size:20px;">年度基础数据</el-menu-item>
       <el-menu-item class="left-action" index="/monitUnit" :route="{name:'monitUnit'}" style="color:	#FFFFFF;font-size:20px;">监管单位</el-menu-item>
-      <el-menu-item class="left-action" index="/lawsReg" :route="{name:'lawsReg'}" style="color:	#FFFFFF;font-size:20px;">法律法规
-      </el-menu-item>
+      <el-menu-item class="left-action" index="/lawsReg" :route="{name:'lawsReg'}" style="color:	#FFFFFF;font-size:20px;">法律法规</el-menu-item>
+    
     </el-submenu>
-        <el-submenu class="left-action" index="1" style="height:70px">
+        <el-submenu class="left-action" index="2" >
       <template class="left-action"  slot="title">
         <img src="../../../../src/assets/img/查询 (2).png" alt="logo">
         <span  class="left-action" style="color:	#FFFFFF;font-size:25px;font-weight:bold"> 空间分析</span>
       </template>
-      <el-menu-item class="left-action" index="/Buffer analysis" :route="{name:'Buffer analysis'}" style="color:	#FFFFFF;font-size:20px;"> 缓冲区分析
-       </el-menu-item>
+      <el-menu-item class="left-action" index="/Buffer analysis" :route="{name:'Buffer analysis'}" style="color:	#FFFFFF;font-size:20px;"> 缓冲区分析</el-menu-item>
       <el-menu-item class="left-action" index="/heatmap" :route="{name:'heatmap'}" style="color:	#FFFFFF;font-size:20px;">热力图分析</el-menu-item>
       <el-menu-item class="left-action" index="/Spatial measurement" :route="{name:'Spatial measurement'}" style="color:	#FFFFFF;font-size:20px;">空间量测</el-menu-item>
-
     </el-submenu>
+
    <el-menu-item class="left-action" index="/three" :route="{name:'three'}" style="height:70px">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">三维系统</span>
     </el-menu-item>
+
        <el-menu-item class="left-action" index="/guangpu" :route="{name:'guangpu'}" style="height:70px">
       <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">光谱库</span>
     </el-menu-item>
