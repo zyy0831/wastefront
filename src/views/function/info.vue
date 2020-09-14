@@ -6,21 +6,21 @@
           <el-form ref="form" :model="form">
             <el-row>
               <el-form-item prop="peo" label="人口">
-                <el-input placeholder="" v-model="form.peo" style="width: 50%;" :disabled="Dis">
+                <el-input placeholder v-model="form.peo" style="width: 50%;" :disabled="Dis">
                   <template slot="append">百万人</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
               <el-form-item prop="area" label="面积">
-                <el-input placeholder="" v-model="form.area" style="width: 50%;" :disabled="Dis">
+                <el-input placeholder v-model="form.area" style="width: 50%;" :disabled="Dis">
                   <template slot="append">平方公里</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
               <el-form-item prop="gdp" label="GDP">
-                <el-input placeholder="" v-model="form.GDP" style="width: 50%;" :disabled="Dis">
+                <el-input placeholder v-model="form.GDP" style="width: 50%;" :disabled="Dis">
                   <template slot="append">亿</template>
                 </el-input>
               </el-form-item>
@@ -31,7 +31,12 @@
           <el-form :model="form">
             <el-row>
               <el-form-item prop="landfillNum" label="填埋场数量">
-                <el-input placeholder="" v-model="form.landfillNum" style="width: 50%;" :disabled="Dis">
+                <el-input
+                  placeholder
+                  v-model="form.landfillNum"
+                  style="width: 50%;"
+                  :disabled="Dis"
+                >
                   <template slot="append">座</template>
                 </el-input>
               </el-form-item>
@@ -44,69 +49,72 @@
   </div>
 </template>
 <script>
-  import basicmap from '../map/basicMap'
-  import * as cityInfoAPI from '../../api/CityInfo'
-  export default {
-    data() {
-      return {
-        activeName: '1',
-        Dis: true,
-        form: {
-          peo: "",
-          area: "",
-          GDP: "",
-          landfillNum: ""
-        },
-        curCity: {
-          city: '', // 参数 firstName
-        }
-
-      }
-    },
-    computed: {
-      listenCity() {
-        return this.$store.state.city;
+import basicmap from "../map/basicMap";
+import * as cityInfoAPI from "../../api/CityInfo";
+export default {
+  data() {
+    return {
+      activeName: "1",
+      Dis: true,
+      form: {
+        peo: "",
+        area: "",
+        GDP: "",
+        landfillNum: "",
       },
-    },
-    created() {
-      this.getInfo(this.$store.state.city);
-    },
-    watch: {
-      listenCity: function (old, newd) {
-        // console.log('old'+old);
-        this.getInfo(old);
+      curCity: {
+        city: "", // 参数 firstName
       },
+    };
+  },
+  computed: {
+    listenCity() {
+      return this.$store.state.city;
     },
-    methods: {
-      getInfo(city) {
-        this.curCity.city = city
-        cityInfoAPI.getCityInfo(this.curCity).then(res => {
-          this.form = res.data[0];
-          console.log(this.form)
-        })
-      }
-
+  },
+  created() {
+    this.getInfo(this.$store.state.city);
+  },
+  watch: {
+    listenCity: function (old, newd) {
+      // console.log('old'+old);
+      this.getInfo(old);
     },
-    components: {
-      basicmap: basicmap,
+  },
+  methods: {
+    getInfo(city) {
+      this.curCity.city = city;
+      cityInfoAPI.getCityInfo(this.curCity).then((res) => {
+        this.form = res.data[0];
+        console.log(this.form);
+      });
     },
-  }
-
+  },
+  components: {
+    basicmap: basicmap,
+  },
+};
 </script>
 <style scoped>
-  #infoCss {
-    height: 100%;
-    width: 100%;
-  }
+#infoCss {
+  height: 100%;
+  width: 100%;
+}
 
-  .air {
-    z-index: 999;
-    width: 18%;
-    top: 10%;
-    right: 3%;
-    position: absolute;
-    /* background-color: rgb(25, 202, 54); */
-    opacity: 0.9;
-  }
-
+.air {
+  z-index: 999;
+  width: 18%;
+  top: 12%;
+  right: 3%;
+  position: absolute;
+  /* background-color: rgb(25, 202, 54); */
+  opacity: 0.9;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #0000ff;
+  font-style:oblique;
+  font-weight:700;
+  text-align: center;
+   
+}
 </style>

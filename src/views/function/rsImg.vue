@@ -247,23 +247,31 @@ export default {
 .airRight {
   z-index: 999;
   width: 15%;
-  top: 10%;
+  top: 12%;
   right: 3%;
   position: absolute;
   /* background-color: rgb(25, 202, 54); */
   opacity: 0.9;
   background-color: white;
+  border-style:solid;
+  border-width:2px;
+  border-color: #0000FF;
+  border-bottom-color: transparent;
+
 }
 
   .airSel {
     z-index: 999;
     width: 15%;
-    top: 25%;
+    top: 27%;
     right: 3%;
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
     opacity: 0.9;
     background-color: white;
+    border-style:solid;
+    border-width:2px;
+    border-color: #0000FF;
 
   }
 
@@ -271,12 +279,16 @@ export default {
   z-index: 999;
   width: 20%;
   height: 80%;
-  top: 10%;
-  right: 65%;
+  top: 12%;
+  right: 58%;
   position: absolute;
   /* background-color: rgb(25, 202, 54); */
   opacity: 0.9;
   background-color: white;
+  border-style:solid;
+  border-width:2px;
+  border-color: #0000FF;
+
 }
 
 </style>
