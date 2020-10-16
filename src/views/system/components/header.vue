@@ -13,9 +13,7 @@
           </el-dropdown>
         </el-col>
         
-        <el-col :sm="3" :md="3" :lg="3" >
-          <img src="../../../../src/assets/img/timg.jpg" alt="logo">
-        </el-col>
+    
       </el-row>
 </template>
 <script>

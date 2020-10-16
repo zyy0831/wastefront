@@ -183,9 +183,9 @@ export default {
   top: 12%;
   right: 5%;
   z-index: 999;
-  background-color: white;
+  background-color: paleturquoise;
   border-style: solid;
-  border-width: 2px;
-  border-color: #0000ff;
+  border-width: 10px;
+  border-color: rebeccapurple;
 }
 </style>

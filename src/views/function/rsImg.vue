@@ -9,7 +9,7 @@
     </el-card>
     <el-form class="airRight" :label-position="labelPosition">
       <el-form-item label="切换遥感影像"></el-form-item>
-      <el-form-item label="01">
+      <el-form-item label="">
         <el-checkbox v-model="checked1" @change="show()">tiff1</el-checkbox>
       </el-form-item>
     </el-form>
@@ -64,7 +64,7 @@ export default {
       wfsVectorLayer: null,
         vector: null,
         vectorSource: null,
-      url_geoser: "http://10.100.18.67:8080/geoserver/wastr/wms?service=WMS",
+      url_geoser: "http://localhost:8080/geoserver/wastr/wms?service=WMS",
       checked1: true,
         featuresGeo: null,
       form: {
@@ -98,7 +98,8 @@ export default {
   },
   mounted() {
     this.initMap();
-    this.getWMS_tiff("wastr:pingdingshan201904031");
+    // this.getWMS_tiff("	cite:pingdingshan201904031");
+     this.getWMS_tiff("		wastr:pingdingshan201904031");
     // this.getWMS_tiff();
     this.getWMS_shp();
     // this.getWFS();
@@ -128,7 +129,7 @@ export default {
         let wfsVectorSource = new VectorSource({
           format: new GeoJSON(),
           projection: 'EPSG:4326',
-          url: 'http://localhost:8080/geoserver/wastr/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=wastr%3AExport_Output&maxFeatures=50&outputFormat=application%2Fjson',
+          url: 'http://localhost:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite%3AExport_Output&maxFeatures=50&outputFormat=text%2Fxml%3B%20subtype%3Dgml%2F2.1.2',
           strategy: bbox
         });
         // console.log(wfsVectorSource);
@@ -252,10 +253,10 @@ export default {
   position: absolute;
   /* background-color: rgb(25, 202, 54); */
   opacity: 0.9;
-  background-color: white;
+  background-color:paleturquoise;
   border-style:solid;
-  border-width:2px;
-  border-color: #0000FF;
+  border-width:10px;
+    border-color:rebeccapurple;
   border-bottom-color: transparent;
 
 }
@@ -268,10 +269,10 @@ export default {
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
     opacity: 0.9;
-    background-color: white;
+    background-color:paleturquoise;
     border-style:solid;
-    border-width:2px;
-    border-color: #0000FF;
+    border-width:10px;
+   border-color:rebeccapurple;
 
   }
 
@@ -279,15 +280,16 @@ export default {
   z-index: 999;
   width: 20%;
   height: 80%;
-  top: 12%;
-  right: 58%;
+  top: 9%;
+  right: 62%;
   position: absolute;
   /* background-color: rgb(25, 202, 54); */
-  opacity: 0.9;
-  background-color: white;
+  opacity: 0.7;
+  background-color:paleturquoise;
   border-style:solid;
-  border-width:2px;
-  border-color: #0000FF;
+  border-width:10px;
+  border-color:rebeccapurple;
+font:red;
 
 }
 

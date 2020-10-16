@@ -49,7 +49,8 @@
     </el-menu-item>
 
        <el-menu-item class="left-action" index="/guangpu" :route="{name:'guangpu'}" style="height:70px">
-      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">光谱库</span>
+      <!-- <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">光谱库</span> -->
+      <a href="http://123.56.100.230/vue-mart/index.html#/maps" style="color:	#FFFFFF;font-size:25px;font-weight:bold">光谱库</a>
     </el-menu-item>
     
   </el-menu>

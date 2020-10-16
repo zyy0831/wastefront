@@ -110,8 +110,9 @@ export default {
   /* background-color: rgb(25, 202, 54); */
   opacity: 0.9;
   border-style: solid;
-  border-width: 2px;
-  border-color: #0000ff;
+  border-width: 10px;
+  background-color: paleturquoise;
+  border-color: rebeccapurple;
   font-style:oblique;
   font-weight:700;
   text-align: center;
