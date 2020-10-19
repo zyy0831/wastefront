@@ -5,6 +5,13 @@
         <el-collapse-item title="城市基本信息" name="1">
           <el-form ref="form" :model="form">
             <el-row>
+              <el-form-item prop="year" label="上报年份" style="width: 91%;">
+                <el-input placeholder v-model="form.year" style="width: 55%;" :disabled="Dis">
+                  <template slot="append">年</template>
+                </el-input>
+              </el-form-item>
+            </el-row>
+            <el-row>
               <el-form-item prop="peo" label="人口">
                 <el-input placeholder v-model="form.peo" style="width: 50%;" :disabled="Dis">
                   <template slot="append">百万人</template>
@@ -25,6 +32,20 @@
                 </el-input>
               </el-form-item>
             </el-row>
+             <el-row>
+              <el-form-item prop="jcmj" label="建成区面积" style="width: 88%;">
+                <el-input placeholder v-model="form.jcmj" style="width: 58%;" :disabled="Dis">
+                  <template slot="append">平方公里</template>
+                </el-input>
+              </el-form-item>
+            </el-row>
+            <el-row>
+              <el-form-item prop="jzmj" label="建筑物面积" style="width: 88%;">
+                <el-input placeholder v-model="form.jzmj" style="width: 58%;" :disabled="Dis">
+                  <template slot="append">万平方米</template>
+                </el-input>
+              </el-form-item>
+            </el-row>
           </el-form>
         </el-collapse-item>
         <el-collapse-item title="建筑垃圾核心信息" name="2">
@@ -38,6 +59,30 @@
                   :disabled="Dis"
                 >
                   <template slot="append">座</template>
+                </el-input>
+              </el-form-item>
+            </el-row>
+            <el-row>
+              <el-form-item prop="ljcsl" label="垃圾产生量">
+                <el-input
+                  placeholder
+                  v-model="form.ljcsl"
+                  style="width: 50%;"
+                  :disabled="Dis"
+                >
+                  <template slot="append">万方</template>
+                </el-input>
+              </el-form-item>
+            </el-row>
+            <el-row>
+              <el-form-item prop="ljzcl" label="垃圾总存量">
+                <el-input
+                  placeholder
+                  v-model="form.ljzcl"
+                  style="width: 50%;"
+                  :disabled="Dis"
+                >
+                  <template slot="append">万方</template>
                 </el-input>
               </el-form-item>
             </el-row>
@@ -57,10 +102,15 @@ export default {
       activeName: "1",
       Dis: true,
       form: {
+        year: "",
         peo: "",
         area: "",
         GDP: "",
+        jcmj: "",
+        jzmj: "",
         landfillNum: "",
+        ljcsl: "",
+        ljzcl: "",
       },
       curCity: {
         city: "", // 参数 firstName
@@ -110,7 +160,7 @@ export default {
   /* background-color: rgb(25, 202, 54); */
   opacity: 0.9;
   border-style: solid;
-  border-width: 10px;
+  border-width: 5px;
   background-color: paleturquoise;
   border-color: rebeccapurple;
   font-style:oblique;
