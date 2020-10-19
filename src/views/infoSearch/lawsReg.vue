@@ -63,7 +63,7 @@
           .catch((_) => {});
       },
       downFile() {
-        const servPath = 'http://10.100.18.67:3000/download/downFile/'
+        const servPath = 'http://10.100.16.139:3000/download/downFile/'
         let id = '1';
         window.location.href = servPath + id;
       },
