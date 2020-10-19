@@ -7,11 +7,17 @@
         <el-form-item label="名称">
           <span>{{iotInfoForm.Name}}</span>
         </el-form-item>
-        <el-form-item label="属性">
-          <span>{{iotInfoForm.attr}}</span><span>计量单位</span>
+        <el-form-item label="地址">
+          <span>{{iotInfoForm.location}}</span><span></span>
         </el-form-item>
-        <el-form-item label="类型">
-          <span>{{iotInfoForm.type}}</span>
+        <el-form-item label="检测值">
+          <span>{{iotInfoForm.view}}</span>
+        </el-form-item>
+        <el-form-item label="检测范围">
+          <span>{{iotInfoForm.Range}}</span>
+        </el-form-item>
+        <el-form-item label="误差">
+          <span>{{iotInfoForm.error}}</span>
         </el-form-item>
       </el-form>
     </div>
@@ -55,8 +61,10 @@
           Name: '',
           lat: '',
           lon: '',
-          attr: '',
-          type: '',
+         location: '',
+          view: '',
+          Range: '',
+          error: '',
         },
         old: ''
       }
