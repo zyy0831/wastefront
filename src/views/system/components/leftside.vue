@@ -2,30 +2,30 @@
   <!--default-active代表导航栏默认选中哪个index, :collapse决定导航栏是否展开，为boolean类型
   :router决定导航栏是否开启路由模式，即在菜单item上设置路由是否生效，值为boolean类型-->
   <el-menu class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose" style="background: #298ff5;top:10px;">
-    <el-menu-item class="left-action" index="/info" :route="{name:'info'}" style="height:70px">
+    <el-menu-item  class="left-action" index="/info" :route="{name:'info'}" style="height:70px">
       <img src="../../../../src/assets/img/城市搜索.png" alt="logo">
-      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">示范城市</span>
+      <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">示范城市</span>
     </el-menu-item>
     
     <el-menu-item class="left-action" index="/RSI" :route="{name:'RSI'}" style="height:70px">
       <img src="../../../../src/assets/img/icon_遥感影像.png" alt="logo">
-      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">遥感影像/监测结果识别</span>
+      <span slot="title"  style="color:	#FFFFFF;font-size:20px;font-weight:bold">遥感影像/监测结果识别</span>
     </el-menu-item>
 
     <el-menu-item class="left-action" index="/facility" :route="{name:'facility'}" style="height:70px">
-      <img>
-      <span slot="title"  style="color:	#FFFFFF;font-size:25px;font-weight:bold">监管数据</span>
+     <img src="../../../../src/assets/img/监管数据补录.png"  style="height:40px " alt="logo">
+      <span slot="title"  style="color:	#FFFFFF;font-size:20px;font-weight:bold">监管数据</span>
     </el-menu-item>
 
     <el-menu-item class="left-action" index="/iot" :route="{name:'iot'}" style="height:70px">
       <img src="../../../../src/assets/img/物联网 (2).png" alt="logo">
-      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">物联网监测</span>
+      <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">物联网监测</span>
     </el-menu-item>
 
     <el-submenu class="left-action" index="1" >
       <template class="left-action"  slot="title">
         <img src="../../../../src/assets/img/查询 (2).png" alt="logo">
-        <span  class="left-action" style="color:	#FFFFFF;font-size:25px;font-weight:bold"> 数据查询</span>
+        <span  class="left-action" style="color:	#FFFFFF;font-size:20px;font-weight:bold"> 数据查询</span>
       </template>
            <el-menu-item class="left-action" index="/checkRes" :route="{name:'checkRes'}" style="color:	#FFFFFF;font-size:20px;"> 存量排查
        </el-menu-item>
@@ -36,8 +36,8 @@
     </el-submenu>
         <el-submenu class="left-action" index="2" >
       <template class="left-action"  slot="title">
-        <img src="../../../../src/assets/img/查询 (2).png" alt="logo">
-        <span  class="left-action" style="color:	#FFFFFF;font-size:25px;font-weight:bold"> 空间分析</span>
+      <img src="../../../../src/assets/img/空间分析.png"  style="height:40px " alt="logo">
+        <span  class="left-action" style="color:	#FFFFFF;font-size:20px;font-weight:bold"> 空间分析</span>
       </template>
       <el-menu-item class="left-action" index="/Buffer analysis" :route="{name:'Buffer analysis'}" style="color:	#FFFFFF;font-size:20px;"> 缓冲区分析</el-menu-item>
       <el-menu-item class="left-action" index="/heatmap" :route="{name:'heatmap'}" style="color:	#FFFFFF;font-size:20px;">热力图分析</el-menu-item>
@@ -45,12 +45,14 @@
     </el-submenu>
 
    <el-menu-item class="left-action" index="/three" :route="{name:'three'}" style="height:70px">
-      <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">三维系统</span>
+   <img src="../../../../src/assets/img/三维系统.png"  style="height:40px " alt="logo">
+      <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">三维系统</span>
     </el-menu-item>
 
        <el-menu-item class="left-action" index="/guangpu" :route="{name:'guangpu'}" style="height:70px">
-      <!-- <span slot="title" style="color:	#FFFFFF;font-size:25px;font-weight:bold">光谱库</span> -->
-      <a href="http://123.56.100.230/vue-mart/index.html#/maps" style="color:	#FFFFFF;font-size:25px;font-weight:bold">光谱库</a>
+      <!-- <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">光谱库</span> -->
+      <img src="../../../../src/assets/img/高光谱影像.png"  style="height:40px " alt="logo">
+      <a href="http://123.56.100.230/vue-mart/index.html#/maps" style="color:	#FFFFFF;font-size:20px;font-weight:bold">光谱库</a>
     </el-menu-item>
     
   </el-menu>
