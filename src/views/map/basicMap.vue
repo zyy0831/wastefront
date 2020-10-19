@@ -87,6 +87,7 @@
     mounted() {
       this.loadMap();
       this.addArea_nu(szNoSub); //添加区域图层方法
+      this.addArea_nu(nosubpds);
       this.addArea(p_bf);
       this.addArea(p_lushan);
       this.addArea(p_rz);
@@ -106,7 +107,7 @@
       this.addArea(sz_nsq);
       this.addArea(sz_psq);
       this.addArea(sz_ytq);
-      this.addArea_nu(nosubpds)
+      
     },
     watch: {
       listenPoint: function (old, newd) {
