@@ -49,10 +49,10 @@
       <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">三维系统</span>
     </el-menu-item>
 
-       <el-menu-item class="left-action" index="/guangpu" :route="{name:'guangpu'}" style="height:70px">
+   <el-menu-item class="left-action" index="/guangpu" :route="{name:'guangpu'}" style="height:70px">
       <!-- <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">光谱库</span> -->
       <img src="../../../../src/assets/img/高光谱影像.png"  style="height:40px " alt="logo">
-      <a href="http://123.56.100.230/vue-mart/index.html#/maps" style="color:	#FFFFFF;font-size:20px;font-weight:bold">光谱库</a>
+        <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">光谱库</span>
     </el-menu-item>
     
   </el-menu>
