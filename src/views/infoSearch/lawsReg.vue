@@ -1,5 +1,5 @@
  <template>
-  <el-table :data="jgTable">
+  <el-table :data="jgTable" height="800">
     <el-table-column prop="time" label="上报时间"></el-table-column>
     <el-table-column prop="num" label="编号"></el-table-column>
     <el-table-column prop="title" label="标题"></el-table-column>
