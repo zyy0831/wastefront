@@ -64,6 +64,34 @@ export default {
         { name: "罗湖区" },
         { name: "罗湖区" },
         { name: "罗湖区" },
+        //平顶山
+        { name: "叶县" },
+        { name: "叶县" },
+        { name: "叶县" },
+        { name: "叶县" },
+        { name: "叶县" },
+        { name: "鲁山县" },
+        { name: "鲁山县" },
+        { name: "鲁山县" },
+        { name: "鲁山县" },
+        { name: "鲁山县" },
+        { name: "汝州市" },
+        { name: "汝州市" },
+        { name: "汝州市" },
+        { name: "汝州市" },
+        { name: "舞钢市" },
+        { name: "舞钢市" },
+        { name: "舞钢市" },
+        { name: "舞钢市" },
+        { name: "郏县" },
+        { name: "郏县" },
+        { name: "郏县" },
+        { name: "郏县" },
+        { name: "宝丰县" },
+        { name: "宝丰县" },
+        { name: "宝丰县" },
+
+      
       ];
       let codeList = {
         光明区: { center: { lng: 113.935895, lat: 22.748816 } },
@@ -74,9 +102,14 @@ export default {
         坪山区: { center: { lng: 114.355441, lat: 22.666678 } },
         福田区: { center: { lng: 114.045441, lat: 22.533013 } },
         罗湖区: { center: { lng: 114.135441, lat: 22.555899 } },
-        盐田区: {
-          center: { lng: 114.236875, lat: 22.556499 },
-        },
+        //平顶山   
+        叶县: { center: { lng: 113.36373, lat: 33.633393 },},  
+        鲁山县: { center: { lng: 112.917164, lat: 33.74512 },}, 
+        汝州市: { center: { lng: 112.849396, lat: 34.17229 },}, 
+        舞钢市: { center: { lng: 113.529108, lat: 33.299915 },},
+        郏县: { center: { lng: 113.232443, lat: 33.985688 },}, 
+        宝丰县: { center: { lng: 113.06145, lat: 33.875226 },},       
+
       };
 
       this.layer = new HeatmapLayer({
