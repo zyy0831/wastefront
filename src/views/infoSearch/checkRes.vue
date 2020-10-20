@@ -25,7 +25,7 @@ export default {
   methods: {
     getCompany01() {
       // 获取监管单位数据
-      getStock.getCompany().then((res) => {
+      getStock.getStock().then((res) => {
           console.log(res);
           this.jgTable = res.data;
         }).catch((err) => {

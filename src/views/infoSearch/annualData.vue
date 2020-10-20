@@ -9,7 +9,7 @@
   </el-table>
 </template>
 <script>
-import * as getAnnualdate from "../../api/company";
+import * as getAnnualdata from "../../api/company";
 export default {
   data() {
     return {
@@ -25,7 +25,7 @@ export default {
   methods: {
     getCompany01() {
       // 获取监管单位数据
-      getAnnualdate.getCompany().then((res) => {
+      getAnnualdata.getAnnualdata().then((res) => {
           console.log(res);
           this.jgTable = res.data;
         }).catch((err) => {
