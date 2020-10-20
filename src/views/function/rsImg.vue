@@ -102,7 +102,7 @@
         wfsVectorLayer: null,
         vector: null,
         vectorSource: null,
-        url_geoser: "http://localhost:8080/geoserver/wastr/wms?service=WMS",
+        url_geoser: "http://10.100.18.67:8080/geoserver/wastr/wms?service=WMS",
         checked1: true,
         featuresGeo: null,
         form: {
@@ -175,7 +175,7 @@
         let wfsVectorSource = new VectorSource({
           format: new GeoJSON(),
           projection: "EPSG:4326",
-          url: "http://localhost:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite%3AExport_Output&maxFeatures=50&outputFormat=text%2Fxml%3B%20subtype%3Dgml%2F2.1.2",
+          url: "http://10.100.18.67:8080/geoserver/cite/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=cite%3AExport_Output&maxFeatures=50&outputFormat=text%2Fxml%3B%20subtype%3Dgml%2F2.1.2",
           strategy: bbox,
         });
         // console.log(wfsVectorSource);
