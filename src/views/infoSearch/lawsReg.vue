@@ -1,11 +1,11 @@
  <template>
   <el-table :data="jgTable" height="800">
-    <el-table-column prop="time" label="上报时间"></el-table-column>
-    <el-table-column prop="num" label="编号"></el-table-column>
-    <el-table-column prop="title" label="标题"></el-table-column>
-    <el-table-column prop="zd" label="制度类型"></el-table-column>
-    <el-table-column prop="yesorno" label="是否公开"></el-table-column>
-    <el-table-column prop="xg" label="修改状态"></el-table-column>
+    <el-table-column align="center"  prop="time" label="上报时间"></el-table-column>
+    <el-table-column align="center"  prop="num" label="编号" width="100"></el-table-column>
+    <el-table-column align="center"  prop="tile" label="标题" width="400"></el-table-column>
+    <el-table-column align="center"  prop="zd" label="制度类型"></el-table-column>
+    <el-table-column align="center"  prop="yesorno" label="是否公开"></el-table-column>
+    <el-table-column align="center"  prop="xg" label="修改状态"></el-table-column>
 
   </el-table>
 </template>
@@ -17,7 +17,7 @@ export default {
       jgTable: [{
         time: "",
         num: "",
-        title: "",
+        tile: "",
         zd: "",
         yesorno: "",
         xg: "",

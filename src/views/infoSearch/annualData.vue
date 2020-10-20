@@ -1,10 +1,10 @@
  <template>
   <el-table :data="jgTable" height="800">
-    <el-table-column prop="time" label="年份"></el-table-column>
-    <el-table-column prop="yield" label="产生量（万方）"></el-table-column>
-    <el-table-column prop="variation" label="变化量（万方）"></el-table-column>
-    <el-table-column prop="stock" label="存量（万方）"></el-table-column>
-    <el-table-column prop="xg" label="修改状态"></el-table-column>
+    <el-table-column align="center"  prop="time" label="年份"></el-table-column>
+    <el-table-column align="center"  prop="yield" label="产生量（万方）"></el-table-column>
+    <el-table-column align="center"  prop="variation" label="变化量（万方）"></el-table-column>
+    <el-table-column align="center"  prop="stock" label="存量（万方）"></el-table-column>
+    <el-table-column align="center"  prop="xg" label="修改状态"></el-table-column>
     
   </el-table>
 </template>

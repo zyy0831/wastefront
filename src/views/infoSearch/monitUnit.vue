@@ -1,9 +1,9 @@
  <template>
   <el-table :data="jgTable" height="800">
-    <el-table-column prop="member" label="成员"></el-table-column>
-    <el-table-column prop="tele" label="电话"></el-table-column>
-    <el-table-column prop="Company" label="单位"></el-table-column>
-    <el-table-column prop="post" label="负责人"></el-table-column>
+    <el-table-column align="center"  prop="member" label="成员"></el-table-column>
+    <el-table-column align="center"  prop="tele" label="电话"></el-table-column>
+    <el-table-column align="center"  prop="Company" label="单位"></el-table-column>
+    <el-table-column align="center"  prop="post" label="负责人"></el-table-column>
   </el-table>
 </template>
 <script>

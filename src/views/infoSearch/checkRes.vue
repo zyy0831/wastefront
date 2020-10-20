@@ -1,10 +1,10 @@
  <template>
   <el-table :data="jgTable" height="800">
-    <el-table-column prop="time" label="时间"></el-table-column>
-    <el-table-column prop="Total" label="垃圾总存量"></el-table-column>
-    <el-table-column prop="type" label="上报类型"></el-table-column>
-    <el-table-column prop="mode" label="存放方式"></el-table-column>
-    <el-table-column prop="xg" label="修改状态"></el-table-column>
+    <el-table-column align="center"  prop="time" label="时间"></el-table-column>
+    <el-table-column align="center"  prop="Total" label="垃圾总存量"></el-table-column>
+    <el-table-column align="center"  prop="type" label="上报类型"></el-table-column>
+    <el-table-column align="center"  prop="mode" label="存放方式"></el-table-column>
+    <el-table-column align="center"  prop="xg" label="修改状态"></el-table-column>
     
   </el-table>
 </template>
