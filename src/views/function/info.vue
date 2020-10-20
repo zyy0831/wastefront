@@ -5,43 +5,43 @@
         <el-collapse-item title="城市基本信息" name="1">
           <el-form ref="form" :model="form">
             <el-row>
-              <el-form-item prop="year" label="上报年份" style="width: 91%;">
+              <el-form-item prop="year" label="上报年份" style="width: 100%;">
                 <el-input placeholder v-model="form.year" style="width: 55%;" :disabled="Dis">
                   <template slot="append">年</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="peo" label="人口">
-                <el-input placeholder v-model="form.peo" style="width: 50%;" :disabled="Dis">
+              <el-form-item prop="peo" label="人口" style="width: 111%;">
+                <el-input placeholder v-model="form.peo" style="width: 49.8%;" :disabled="Dis">
                   <template slot="append">百万人</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="area" label="面积">
-                <el-input placeholder v-model="form.area" style="width: 50%;" :disabled="Dis">
+              <el-form-item prop="area" label="面积"  style="width: 111%;">
+                <el-input placeholder v-model="form.area" style="width: 49.8%;" :disabled="Dis">
                   <template slot="append">平方公里</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="gdp" label="GDP">
-                <el-input placeholder v-model="form.GDP" style="width: 50%;" :disabled="Dis">
+              <el-form-item prop="gdp" label="GDP"  style="width: 111%;">
+                <el-input placeholder v-model="form.GDP" style="width: 49.8%;" :disabled="Dis">
                   <template slot="append">亿</template>
                 </el-input>
               </el-form-item>
             </el-row>
              <el-row>
-              <el-form-item prop="jcmj" label="建成区面积" style="width: 88%;">
-                <el-input placeholder v-model="form.jcmj" style="width: 58%;" :disabled="Dis">
+              <el-form-item prop="jcmj" label="建成区面积" style="width: 96.8%;">
+                <el-input placeholder v-model="form.jcmj" style="width: 58.8%;" :disabled="Dis">
                   <template slot="append">平方公里</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="jzmj" label="建筑物面积" style="width: 88%;">
-                <el-input placeholder v-model="form.jzmj" style="width: 58%;" :disabled="Dis">
+              <el-form-item prop="jzmj" label="建筑物面积" style="width: 96.8%;">
+                <el-input placeholder v-model="form.jzmj" style="width: 58.8%;" :disabled="Dis">
                   <template slot="append">万平方米</template>
                 </el-input>
               </el-form-item>
@@ -153,7 +153,7 @@ export default {
 
 .air {
   z-index: 999;
-  width: 18%;
+  width: 17%;
   top: 12%;
   right: 3%;
   position: absolute;

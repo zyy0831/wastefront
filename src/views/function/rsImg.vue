@@ -316,7 +316,7 @@
 
   .airRight {
     z-index: 888;
-    width: 15%;
+    width: 12%;
     top: 12%;
     right: 3%;
     position: absolute;
@@ -331,7 +331,7 @@
 
   .airSel {
     z-index: 888;
-    width: 15%;
+    width: 12%;
     top: 26.3%;
     right: 3%;
     position: absolute;
@@ -345,10 +345,10 @@
 
   .airLeft {
     z-index: 888;
-    width: 20%;
+    width: 14%;
     height: 62.1%;
     top: 9.8%;
-    right: 61.6%;
+    right: 67.6%;
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
     opacity: 0.7;
