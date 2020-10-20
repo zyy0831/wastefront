@@ -10,7 +10,7 @@
   </el-table>
 </template>
 <script>
-import * as getCompanyAPI from "../../api/company";
+import * as getlawyer from "../../api/company";
 export default {
   data() {
     return {
@@ -27,7 +27,7 @@ export default {
   methods: {
     getCompany01() {
       // 获取监管单位数据
-      getCompanyAPI.getCompany().then((res) => {
+      getlawyer.getCompany().then((res) => {
           console.log(res);
           this.jgTable = res.data;
         }).catch((err) => {

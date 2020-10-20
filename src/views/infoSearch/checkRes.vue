@@ -9,7 +9,7 @@
   </el-table>
 </template>
 <script>
-import * as getCompanyAPI from "../../api/company";
+import * as getStock from "../../api/company";
 export default {
   data() {
     return {
@@ -18,14 +18,14 @@ export default {
         Total: "",
         type: "",
         mode: "",
-        xg: "",
+        xg: "", 
       }],
     };
   },
   methods: {
     getCompany01() {
       // 获取监管单位数据
-      getCompanyAPI.getCompany().then((res) => {
+      getStock.getCompany().then((res) => {
           console.log(res);
           this.jgTable = res.data;
         }).catch((err) => {
