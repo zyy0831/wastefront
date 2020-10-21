@@ -1,5 +1,5 @@
  <template>
-  <el-table :data="jgTable" height="800">
+  <el-table :data="jgTable" height="620">
     <el-table-column align="center"  prop="member" label="成员"></el-table-column>
     <el-table-column align="center"  prop="tele" label="联系方式"></el-table-column>
     <el-table-column align="center"  prop="Company" label="所属单位"></el-table-column>

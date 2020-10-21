@@ -1,5 +1,5 @@
  <template>
-  <el-table :data="jgTable" height="800">
+  <el-table :data="jgTable" height="620">
     <el-table-column align="center"  prop="time" label="年份"></el-table-column>
     <el-table-column align="center"  prop="yield" label="产生量（万方）"></el-table-column>
     <el-table-column align="center"  prop="variation" label="变化量（万方）"></el-table-column>

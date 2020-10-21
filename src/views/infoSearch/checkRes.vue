@@ -1,5 +1,5 @@
  <template>
-  <el-table :data="jgTable" height="800">
+  <el-table :data="jgTable" height="620">
     <el-table-column align="center"  prop="time" label="时间"></el-table-column>
     <el-table-column align="center"  prop="Total" label="垃圾总存量"></el-table-column>
     <el-table-column align="center"  prop="type" label="上报类型"></el-table-column>

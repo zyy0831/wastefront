@@ -346,9 +346,9 @@
   .airLeft {
     z-index: 888;
     width: 14%;
-    height: 62.1%;
-    top: 9.8%;
-    right: 67.6%;
+    height: 75.1%;
+    top: 12%;
+    right: 62.6%;
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
     opacity: 0.7;
