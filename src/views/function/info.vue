@@ -1,11 +1,15 @@
 <template>
+
   <div id="infoCss">
-    <div class="air">
-      <el-collapse v-model="activeName">
+    
+      <el-button type="primary" @click="toshow()">城市信息</el-button>
+     
+    <div class="air" v-show="show">
+                  <el-collapse v-model="activeName">
         <el-collapse-item title="城市基本信息" name="1">
           <el-form ref="form" :model="form">
             <el-row>
-              <el-form-item prop="year" label="上报年份" style="width: 100%;">
+              <el-form-item prop="year" label="上报年份" style="width: 100%; ">
                 <el-input placeholder v-model="form.year" style="width: 55%;" :disabled="Dis">
                   <template slot="append">年</template>
                 </el-input>
@@ -99,6 +103,7 @@ import * as cityInfoAPI from "../../api/CityInfo";
 export default {
   data() {
     return {
+      show:false,
       activeName: "1",
       Dis: true,
       form: {
@@ -123,6 +128,7 @@ export default {
     },
   },
   created() {
+    this.show();
     this.getInfo(this.$store.state.city);
   },
   watch: {
@@ -132,6 +138,9 @@ export default {
     },
   },
   methods: {
+    toshow(){
+      this.show = !this.show;
+    },
     getInfo(city) {
       this.curCity.city = city;
       cityInfoAPI.getCityInfo(this.curCity).then((res) => {
@@ -150,11 +159,18 @@ export default {
   height: 100%;
   width: 100%;
 }
-
+.el-button--primary{
+  z-index: 999;
+ position: absolute;
+   width: 5%;
+  top: 90%;
+  right: 0%;
+ font-weight: 200;
+}
 .air {
   z-index: 999;
   width: 17%;
-  top: 12%;
+  top: 30%;
   right: 3%;
   position: absolute;
   /* background-color: rgb(25, 202, 54); */
@@ -163,9 +179,10 @@ export default {
   border-width: 5px;
   background-color: paleturquoise;
   border-color: rebeccapurple;
-  font-style:oblique;
-  font-weight:700;
+  /* font-style:oblique; */
+  font-weight:normal;
   text-align: center;
    
 }
+
 </style>
