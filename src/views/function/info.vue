@@ -6,45 +6,46 @@
      
     <div class="air" v-show="show">
                   <el-collapse v-model="activeName">
-        <el-collapse-item title="城市基本信息" name="1">
+        <el-collapse-item  name="1">
+          <span class="collapse-title" slot="title">城市基本信息</span>
           <el-form ref="form" :model="form">
             <el-row>
-              <el-form-item prop="year" label="上报年份" style="width: 100%; ">
+              <el-form-item prop="year" label="上报年份" class="el-form-item_lable" style="width: 100%; ">
                 <el-input placeholder v-model="form.year" style="width: 55%;" :disabled="Dis">
                   <template slot="append">年</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="peo" label="人口" style="width: 111%;">
+              <el-form-item prop="peo" label="人口" class="el-form-item_lable" style="width: 111%;">
                 <el-input placeholder v-model="form.peo" style="width: 49.8%;" :disabled="Dis">
                   <template slot="append">百万人</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="area" label="面积"  style="width: 111%;">
+              <el-form-item prop="area" label="面积" class="el-form-item_lable" style="width: 111%;">
                 <el-input placeholder v-model="form.area" style="width: 49.8%;" :disabled="Dis">
                   <template slot="append">平方公里</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="gdp" label="GDP"  style="width: 111%;">
+              <el-form-item prop="gdp" label="GDP" class="el-form-item_lable"  style="width: 111%;">
                 <el-input placeholder v-model="form.GDP" style="width: 49.8%;" :disabled="Dis">
                   <template slot="append">亿</template>
                 </el-input>
               </el-form-item>
             </el-row>
              <el-row>
-              <el-form-item prop="jcmj" label="建成区面积" style="width: 96.8%;">
+              <el-form-item prop="jcmj" label="建成区面积" class="el-form-item_lable" style="width: 96.8%;">
                 <el-input placeholder v-model="form.jcmj" style="width: 58.8%;" :disabled="Dis">
                   <template slot="append">平方公里</template>
                 </el-input>
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="jzmj" label="建筑物面积" style="width: 96.8%;">
+              <el-form-item prop="jzmj" label="建筑物面积" class="el-form-item_lable" style="width: 96.8%;">
                 <el-input placeholder v-model="form.jzmj" style="width: 58.8%;" :disabled="Dis">
                   <template slot="append">万平方米</template>
                 </el-input>
@@ -52,10 +53,11 @@
             </el-row>
           </el-form>
         </el-collapse-item>
-        <el-collapse-item title="建筑垃圾核心信息" name="2">
+        <el-collapse-item name="2">
+          <span class="collapse-title" slot="title">建筑垃圾核心信息</span>
           <el-form :model="form">
             <el-row>
-              <el-form-item prop="landfillNum" label="填埋场数量">
+              <el-form-item prop="landfillNum" label="填埋场数量" class="el-form-item_lable">
                 <el-input
                   placeholder
                   v-model="form.landfillNum"
@@ -67,7 +69,7 @@
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="ljcsl" label="垃圾产生量">
+              <el-form-item prop="ljcsl" label="垃圾产生量" class="el-form-item_lable">
                 <el-input
                   placeholder
                   v-model="form.ljcsl"
@@ -79,7 +81,7 @@
               </el-form-item>
             </el-row>
             <el-row>
-              <el-form-item prop="ljzcl" label="垃圾总存量">
+              <el-form-item prop="ljzcl" label="垃圾总存量" class="el-form-item_lable">
                 <el-input
                   placeholder
                   v-model="form.ljzcl"
@@ -167,6 +169,18 @@ export default {
   right: 0%;
  font-weight: 200;
 }
+.collapse-title{
+  color: blue;
+  font-size: 18px;
+  /*text-indent:10px;*/
+   flex: auto; 
+   order: 1;
+}
+
+.el-form-item_lable{
+  text-indent:10px;
+}
+
 .air {
   z-index: 999;
   width: 17%;

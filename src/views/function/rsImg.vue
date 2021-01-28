@@ -9,10 +9,10 @@
     </el-card>
     <el-form class="airRight" :label-position="labelPosition">
       <!-- <el-form-item label="切换遥感影像"></el-form-item> -->
-      <el-form-item label="切换遥感影像">
+      <el-form-item label="切换遥感影像" class="el-form-item_lable">
         <el-checkbox v-model="checked1" @change="show()"></el-checkbox>
       </el-form-item>
-      <el-form-item label="详细信息显示">
+      <el-form-item label="详细信息显示" class="el-form-item_lable">
         <el-checkbox :value="showfrom" @change="show2()"></el-checkbox>
       </el-form-item>
     </el-form>
@@ -312,6 +312,10 @@
   #shpDiv {
     width: 100%;
     height: 100%;
+  }
+
+  .el-form-item_lable{
+  text-indent:15px;
   }
 
   .airRight {
