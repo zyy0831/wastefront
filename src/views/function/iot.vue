@@ -1,22 +1,25 @@
 <template>
   <div id="iot">
     <basicmap ref="map"></basicmap>
-    <div id="popup" class="ol-popup" style="width:200px">
+    <div id="popup" class="ol-popup" style="width:250px;" > 
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
       <el-form :model="iotInfoForm">
-        <el-form-item label="名称">
+        <div style="background-color:#C7C8CA;width:100%;height:40px;">
+        <span style="align:center;position:absolute;margin-top:5px;margin-left:-54px;font-size:20px;font-weight: bold;">传感器信息</span>
+        </div>
+        <el-form-item label="名称" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{iotInfoForm.Name}}</span>
         </el-form-item>
-        <el-form-item label="地址">
+        <el-form-item label="地址" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{iotInfoForm.location}}</span><span></span>
         </el-form-item>
-        <el-form-item label="检测值">
+        <el-form-item label="检测值" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{iotInfoForm.view}}</span>
         </el-form-item>
-        <el-form-item label="检测范围">
+        <el-form-item label="检测范围" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{iotInfoForm.Range}}</span>
         </el-form-item>
-        <el-form-item label="误差">
+        <el-form-item label="误差" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{iotInfoForm.error}}</span>
         </el-form-item>
       </el-form>
@@ -116,6 +119,7 @@
         }
         // 批量添加feature
         this.pointLayer.getSource().addFeatures(this.featuresArr);
+        // console.log(this.featuresArr)
       },
       getIcon(type) {
         let src = "";
@@ -128,6 +132,7 @@
             src: src,
             anchor: [1, 1],
             scale: 0.15,
+            
           })
         });
         return styleIcon;
@@ -232,14 +237,15 @@
 
   .ol-popup {
     position: absolute;
-    background-color: white;
-    -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-    padding: 15px;
-    border-radius: 10px;
+    background-color:paleturquoise;
+    /* -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); */
+    /* filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); */
+    /* padding: 15px; */
+    /* border-radius: 10px; */
     border: 1px solid #cccccc;
     bottom: 12px;
     left: -50px;
+    width: 20%;
   }
 
   .ol-popup:after,
@@ -278,5 +284,6 @@
   .ol-popup-closer:after {
     content: "✖";
   }
+ 
 
 </style>

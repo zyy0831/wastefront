@@ -2,25 +2,28 @@
 <template>
   <div id="iot">
     <basicmap ref="map"></basicmap>
-    <div id="popup" class="ol-popup" style="width: 200px">
+    <div id="popup" class="ol-popup" style="width: 250px">
       <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+        <div style="background-color:#C7C8CA;width:100%;height:40px;">
+        <span style="align:center;position:absolute;margin-top:5px;margin-left:-54px;font-size:20px;font-weight: bold;">消纳场信息</span>
+        </div>
       <el-form :model="facInfoForm">
-        <el-form-item label="名称">
+        <el-form-item label="名称" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{ facInfoForm.Name }}</span>
         </el-form-item>
-        <el-form-item label="地址">
+        <el-form-item label="地址" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{ facInfoForm.location }}</span>
         </el-form-item>
-        <el-form-item label="类型">
+        <el-form-item label="类型" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{ facInfoForm.Attr }}</span>
         </el-form-item>
-        <el-form-item label="消纳能力">
+        <el-form-item label="消纳能力" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{ facInfoForm.capacity }}</span>
         </el-form-item>
-        <el-form-item label="建设状态">
+        <el-form-item label="建设状态" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{ facInfoForm.status }}</span>
         </el-form-item>
-        <el-form-item label="占地面积">
+        <el-form-item label="占地面积" style="margin-left:20px;margin-top:15px;font-weight:bolder;">
           <span>{{ facInfoForm.area }}</span>
         </el-form-item>
       </el-form>
@@ -226,14 +229,15 @@ export default {
 
 .ol-popup {
   position: absolute;
-  background-color: white;
-  -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-  filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
-  padding: 15px;
-  border-radius: 10px;
+  background-color: paleturquoise;
+  /* -webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); */
+  /* filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2)); */
+  /* padding: 15px; */
+  /* border-radius: 10px; */
   border: 1px solid #cccccc;
   bottom: 12px;
   left: -50px;
+  width: 20%;
 }
 
 .ol-popup:after,

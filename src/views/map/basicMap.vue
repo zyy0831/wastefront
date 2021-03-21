@@ -64,6 +64,8 @@
   import sz_psq from "../../assets/geoJson/sz_psq.json";
   import sz_ytq from "../../assets/geoJson/sz_ytq.json";
   import nosubpds from "../../assets/geoJson/nosubpds.json";
+  import j_ning from "../../assets/geoJson/j_ning.json";
+  import S_qiu from "../../assets/geoJson/S_qiu.json";
   export default {
     name: "OlMap",
     data() {
@@ -72,7 +74,7 @@
         view: null,
         areaLayer: null,
         mapCenter: this.$store.state.mainPoint, //地图中心点，默认——深圳
-        mapZoom: 9,
+        mapZoom: 10,
         // [114.052857, 22.545676] 深圳
 
         pointLayer: null,
@@ -107,6 +109,8 @@
       this.addArea(sz_nsq);
       this.addArea(sz_psq);
       this.addArea(sz_ytq);
+      this.addArea(j_ning);
+      this.addArea(S_qiu);
       
     },
     watch: {
@@ -138,7 +142,7 @@
         this.map = new Map({
           layers: [
             new TileLayer({
-              opacity: 0.7,
+              opacity: 1,
               source: new WMTS({
                 url: wmtsUrl_1 + webKey,
                 layer: "vec",
@@ -155,7 +159,7 @@
               }),
             }),
             new TileLayer({
-              opacity: 0.7,
+              opacity: 1,
               source: new WMTS({
                 url: wmtsUrl_2 + webKey,
                 layer: "cva",

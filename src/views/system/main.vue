@@ -1,12 +1,13 @@
 <template>
   <el-container class="all">
     <!-- 顶栏容器-->
-    <el-header  style="height: 88px;">
+    <el-header  style="height: 60px;">
       <my-header></my-header>
     </el-header>
-    <el-container style="padding: 0px;margin: 0px; height: 100%;">
+    <!-- <el-col style="background-color:rgb(2, 2, 0);width: 100%;height:0px;"></el-col> -->
+    <el-container style="padding: 0px;margin: 0px; height: 100%; ">
       <!-- 侧边栏容器-->
-      <el-aside>
+      <el-aside width="auto">
         <my-leftside></my-leftside>
       </el-aside>
       <!-- 主要区域容器 -->
@@ -42,18 +43,22 @@
     margin: 0;
 }
   .el-header {
-    background: url(../../../src/assets/img/top-bg.png);
+    /* background-color: #0078CC; */
     line-height: 100%;
+    width:100%;
     padding: 0;
+    background-image: linear-gradient(#0087CF, #006AC9);
   }
 
   .el-aside {
-    width: 320px;
-    background:  #298ff5 ;
-    box-shadow: 0 0 15px rgba(105, 105, 105, 0.76);
+    /* width: 150px; */
+    background-color: #414855;
+    /* box-shadow: 0 0 15px #414855; */
+   
   }
  .el-main{
 
    padding:0;
+   width: 100%;
  }
 </style>

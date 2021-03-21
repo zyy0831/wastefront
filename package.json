@@ -5,13 +5,14 @@
   "author": "zyy0831 <798206656@qq.com>",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --host 10.100.16.139",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "element-ui": "^2.13.2",
+    "jsts": "^2.6.1",
     "ol": "^6.4.3",
     "qs.js": "^0.1.12",
     "vue": "^2.5.2",

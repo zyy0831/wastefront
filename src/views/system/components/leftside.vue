@@ -1,7 +1,9 @@
 <template>
   <!--default-active代表导航栏默认选中哪个index, :collapse决定导航栏是否展开，为boolean类型
   :router决定导航栏是否开启路由模式，即在菜单item上设置路由是否生效，值为boolean类型-->
-  <el-menu class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose" style="background: #298ff5;top:10px;">
+  <div :width="isCollapse ? '150px' : '200px'">
+  <div class="toggle-button" @click="toggleCollapse" style="background-color:#414855;font-size:20px;line-height:24px;color:#fff;text-align:center;letter: spacing 0.6em;cursor:pointer;">|||</div>
+  <el-menu class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose" style="background: #298ff5;top:10px;" :collapse="isCollapse" >
     <el-menu-item  class="left-action" index="/info" :route="{name:'info'}" style="height:70px">
       <img src="../../../../src/assets/img/城市搜索.png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">示范城市</span>
@@ -56,11 +58,13 @@
     </el-menu-item>
     
   </el-menu>
+  </div>
 </template>
 <script>
   export default {
     data() {
       return {
+        isCollapse:true,
       }
     },
     methods: {
@@ -69,7 +73,10 @@
       },
       handleClose(key, keyPath) {
         console.log(key, keyPath);
-      }
+      },
+      toggleCollapse(){
+        this.isCollapse = !this.isCollapse
+      },
     }
   }
 
@@ -77,18 +84,28 @@
 <style scoped>
 .left-action{
 
-  background: #208af5;
+  background: #414855;
+  border-right: 20px;
 }
 
 .left-action:hover{
-  background-color: #409EFF;
+  background-color: #414855;
 }
 
 .el-submenu:hover{
-        background:  #409EFF;
+        background:  #414855;
+        
     }
 
 .el-submenu__title:hover{
-        background-color:  #409EFF;
+        background-color:  #414855;
     }
+/* .toggle-button{
+  border: solid;
+  width: 50px;
+  margin-left: 40%;
+  background-color: blue;
+  /* position: absolute; */
+  /* align-items: center; */
+/* } */ 
 </style>

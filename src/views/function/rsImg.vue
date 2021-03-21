@@ -2,47 +2,60 @@
   <div id="shpDiv">
     <basicmap ref="map"></basicmap>
     <el-card class="airSel">
-      <el-select v-model="filterPropName" placeholder="请选择" @change="Query(filterPropName)">
+      <div style="background-color:#367EED;width:50%;height:30px;margin-left:50px;margin-bottom:20px;border-radius:25px;">
+      <span class="SX">属性选择</span>
+      </div>
+      <el-select v-model="filterPropName" placeholder="请选择" @change="Query(filterPropName)" style="width:100%;">
         <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
         </el-option>
       </el-select>
     </el-card>
-    <el-form class="airRight" :label-position="labelPosition">
+    <div>
+    
+    <el-form class="airRight" :label-position="labelPosition" id="selectFrom" >
+      <div style="width:100%;height:40px;background-color:#367EED;margin-top:20px;">
+      <span style="font-size:22px;;align:center;margin-top:30px;font-weight: bold;color:white;">功能切换区域</span>
+      </div>
       <!-- <el-form-item label="切换遥感影像"></el-form-item> -->
       <el-form-item label="切换遥感影像" class="el-form-item_lable">
         <el-checkbox v-model="checked1" @change="show()"></el-checkbox>
       </el-form-item>
+      <div style="width:80%;height:0.5px;background-color:white;margin-left:22px;"></div>
       <el-form-item label="详细信息显示" class="el-form-item_lable">
         <el-checkbox :value="showfrom" @change="show2()"></el-checkbox>
       </el-form-item>
     </el-form>
-    <div>
+    </div>
+    <div >
       <el-form class="airLeft" :label-position="labelPosition" :model="form" size="mini" v-show="showfrom" v-drag>
-        <el-form-item style="background-color:white;">
+        <el-form-item style="background-color:#C7C8CA;  ">
+          <div>
+            <span style="font-size:20px;font-weight:bold;height:100%;width:100%;margin-left:10px;">详细信息</span>
           <el-button type="primary" @click="closeform()" size="mini" icon="el-icon-close"
-            style="float: right; z-index: 999;background-color:red ;border-color :red!important; font-size:5px">
+            style="float: right; z-index: 999;background-color:#C7C8CA;border-color :#C7C8CA;!important; font-size:15px ;color:black;">
           </el-button>
+          </div>
         </el-form-item>
-        <el-form-item label="地址">
-          <el-input v-model="form.Address"></el-input>
+        <el-form-item label="地址:" style="margin-left:15px;margin-top:30px;margin-bottom:15px;font-weight:bold;">
+          <el-input v-model="form.Address" style="width:60%;margin-left:-20px;"></el-input>
         </el-form-item>
-        <el-form-item label="面积">
-          <el-input v-model="form.Area"></el-input>
+        <el-form-item label="面积:" style="margin-left:15px;margin-bottom:15px;font-weight:bold;">
+          <el-input v-model="form.Area"style="width:60%;margin-left:-20px;"></el-input>
         </el-form-item>
-        <el-form-item label="个数">
-          <el-input v-model="form.Id"></el-input>
+        <el-form-item label="个数:" style="margin-left:15px;margin-bottom:15px;font-weight:bold;">
+          <el-input v-model="form.Id"style="width:60%;margin-left:-20px;"></el-input>
         </el-form-item>
-        <el-form-item label="编号">
-          <el-input v-model="form.Num"></el-input>
+        <el-form-item label="编号:" style="margin-left:15px;margin-bottom:15px;font-weight:bold;">
+          <el-input v-model="form.Num" style="width:60%;margin-left:-20px;"></el-input>
         </el-form-item>
-        <el-form-item label="类型">
-          <el-input v-model="form.Type"></el-input>
+        <el-form-item label="类型；" style="margin-left:15px;margin-bottom:15px;font-weight:bold;">
+          <el-input v-model="form.Type" style="width:60%;margin-left:-20px;"></el-input>
         </el-form-item>
-        <el-form-item label="体积">
-          <el-input v-model="form.Vol"></el-input>
+        <el-form-item label="体积：" style="margin-left:15px;margin-bottom:15px;font-weight:bold;">
+          <el-input v-model="form.Vol" style="width:60%;margin-left:-20px;"></el-input>
         </el-form-item>
-        <el-form-item label="备注">
-          <el-input v-model="form.Remake"></el-input>
+        <el-form-item label="备注：" style="margin-left:15px;margin-bottom:15px;font-weight:bold;">
+          <el-input v-model="form.Remake" style="width:60%;margin-left:-20px;"></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -95,7 +108,7 @@
     data() {
       return {
         labelPosition: "right",
-        showfrom: true,
+        showfrom: false,
         map: null,
         layer_wms_tiff: null,
         layer_wms_shp: null,
@@ -316,50 +329,66 @@
 
   .el-form-item_lable{
   text-indent:15px;
-  }
+  margin-top: 15px;
+  
+   }
+   #selectFrom >>> .el-form-item__label {
+  font-size: 18px;
+  color:white;
+  
+  /* border-style: solid;
+   */
+  
+  
+}
 
   .airRight {
     z-index: 888;
-    width: 12%;
-    top: 12%;
-    right: 3%;
+    width: 10%;
+    top: 9%;
+    right: 1%;
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
-    opacity: 0.9;
-    background-color: paleturquoise;
-    border-style: solid;
-    border-width: 5px;
+    opacity: 1;
+    background-color: #367EED;
+    /* border-style: solid; */
+    /* border-width: 2px; */
     border-color: rebeccapurple;
     border-bottom-color: transparent;
   }
 
   .airSel {
+    z-index: 999;
+    width: 12%;
+    top:35%;
+    right: 0%;
+    height: 11%;
+    position: absolute;
+    /* background-color: rgb(25, 202, 54); */
+    opacity: 1;
+    background-color: #367EED;
+    /* border-style: solid; */
+    /* border-width: 2px; */
+    /* border-color: rebeccapurple; */
+  }
+.SX{
+  font-size: 20px;
+  font-weight: bold;
+  color:white;
+}
+  .airLeft {
     z-index: 888;
     width: 12%;
-    top: 26.3%;
-    right: 3%;
+    height: 37%;
+    top: 36%;
+    right: 16%;
     position: absolute;
     /* background-color: rgb(25, 202, 54); */
     opacity: 0.9;
     background-color: paleturquoise;
-    border-style: solid;
-    border-width: 5px;
-    border-color: rebeccapurple;
-  }
-
-  .airLeft {
-    z-index: 888;
-    width: 14%;
-    height: 75.1%;
-    top: 12%;
-    right: 62.6%;
-    position: absolute;
-    /* background-color: rgb(25, 202, 54); */
-    opacity: 0.7;
-    background-color: paleturquoise;
-    border-style: solid;
-    border-width: 5px;
-    border-color: rebeccapurple;
+    /* border-style: solid;
+    border-width: 2px;
+    border-color: rebeccapurple; */
     font: red;
   }
 
