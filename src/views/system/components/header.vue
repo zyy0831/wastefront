@@ -10,6 +10,8 @@
             <el-dropdown-menu slot="dropdown" style="background: #0078CC;">
               <el-dropdown-item command="pdsCity" class="action" style="color:	#FFFFFF;">平顶山</el-dropdown-item>
               <el-dropdown-item command="szCity" class="action" style="color:	#FFFFFF;"> 深圳</el-dropdown-item>
+               <el-dropdown-item command="sqCity" class="action" style="color:	#FFFFFF;"> 商丘</el-dropdown-item>
+               <el-dropdown-item command="jnCity" class="action" style="color:	#FFFFFF;"> 济宁</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
@@ -34,7 +36,15 @@
         } else if (para == 'szCity') {
           this.selectCity = '深圳市';
           this.$store.state.mainPoint = [114.052857, 22.545676];
-        } else {
+        } else if(para=='sqCity') {
+           this.selectCity = '商丘';
+          this.$store.state.mainPoint = [115.650497, 34.437054];
+        }
+        else if(para =='jnCity'){
+          this.selectCity='济宁市'
+          this.$store.state.mainPoint=[116.587245,35.415393]
+        }
+        else{
           return;
         }
       },

@@ -203,7 +203,7 @@
           this.view.setZoom(10);
         }else{
           this.$store.state.city ='pds';
-          this.view.setZoom(9);
+          this.view.setZoom(10);
         }
         this.view.setCenter(xy);
       },
