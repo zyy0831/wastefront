@@ -2,8 +2,8 @@
   <!--default-active代表导航栏默认选中哪个index, :collapse决定导航栏是否展开，为boolean类型
   :router决定导航栏是否开启路由模式，即在菜单item上设置路由是否生效，值为boolean类型-->
   <div :width="isCollapse ? '150px' : '200px'">
-  <div class="toggle-button" @click="toggleCollapse" style="background-color:#414855;font-size:20px;line-height:24px;color:#fff;text-align:center;letter: spacing 0.6em;cursor:pointer;">|||</div>
-  <el-menu class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose" style="background: #298ff5;top:10px;" :collapse="isCollapse" >
+  <div class="toggle-button" @click="toggleCollapse" style="background-color:#003270;font-size:20px;line-height:24px;color:#fff;text-align:center;letter: spacing 0.6em;cursor:pointer;">|||</div>
+  <el-menu class="el-menu-vertical-demo" :router="true" @open="handleOpen" @close="handleClose" style="background: #003270;top:10px;" :collapse="isCollapse" >
     <el-menu-item  class="left-action" index="/info" :route="{name:'info'}" style="height:70px">
       <img src="../../../../src/assets/img/城市搜索.png" alt="logo">
       <span slot="title" style="color:	#FFFFFF;font-size:20px;font-weight:bold">示范城市</span>
@@ -84,12 +84,12 @@
 <style scoped>
 .left-action{
 
-  background: #414855;
+  background: #003270;
   border-right: 20px;
 }
 
 .left-action:hover{
-  background-color: #414855;
+  background-color: #003270;
 }
 
 .el-submenu:hover{

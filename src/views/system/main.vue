@@ -1,7 +1,7 @@
 <template>
   <el-container class="all">
     <!-- 顶栏容器-->
-    <el-header  style="height: 60px;">
+    <el-header  style="height: 100px;">
       <my-header></my-header>
     </el-header>
     <!-- <el-col style="background-color:rgb(2, 2, 0);width: 100%;height:0px;"></el-col> -->
@@ -52,7 +52,7 @@
 
   .el-aside {
     /* width: 150px; */
-    background-color: #414855;
+    background-color: #003270;
     /* box-shadow: 0 0 15px #414855; */
    
   }
